@@ -2,51 +2,75 @@ import React from 'react'
 import ProductChild from './ProductChild'
 import Shaw from "../../assets/shaw.png";
 import Shaws from "../../assets/kebab_PNG50.png";
+import styled from "styled-components";
+
 
 function Products() {
   return (
-    <div className='flex justify-center gap-5 flex-wrap'>
+    <Body>
       {foods.map((item) => (
         <ProductChild item={item}  />
 
       ))}
       
-    </div>
+    </Body>
   )
 }
 
 export default Products
 
+const Body = styled.div`
+margin: 3rem 0;
+display:grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+align-content:center;
+justify-items: center;
+gap: 1rem;
+
+@media screen and (max-width:700px) {
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+}
+@media screen and (max-width:500px) {
+grid-template-columns: repeat(auto-fit, minmax(1r, 1fr));
+  
+}
+
+`
+
 
 
 const foods = [
   {
-    name: "Lamb Shawarma",
+    name: "T Shirt",
     price: "200",
     id: "4563",
-    image:"/img/Shawarma2.jpg",
+    image:"/img/01.png",
   },
 
   {
-    name: "Pizza",
+    name: "Suit And Tie",
     price: "350",
     id: "463",
-    image:"/img/pizza.jpg",
+    image:"/img/02.png",
+
 
   },
 
   
   {
-    name: "Chicken Shawarma",
+    name: "Sport Canvas",
     price: "200",
     id: "4563",
-    image:"/img/Shawarma.jpg",
+    image:"/img/03.png",
+
   },
   {
-    name: "Chicken and Chips",
+    name: "Coorperate Wear",
     price: "200",
     id: "453",
-    image:"/img/chi.jpg",
+    image:"/img/04.png",
+    
 
   },
 ]

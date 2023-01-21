@@ -35,11 +35,26 @@ const cartSlice = createSlice({
 
         removeCart: (state, action) => {
             const product = state.itemList.find((prev) => prev.id === action.payload.id)
-            const cartItem = state.itemList.filter((prev) => prev.id !== product.id)
+            const cartItem = state.itemList.filter(
+                (cartItem) => cartItem.id !== product.id
+              );
+        
+              state.itemList = cartItem;
+              state.allTotalPrice -= product.price * product.qty;
+              state.totalQuantity -= product.qty;
             
             
+        },
+
+        increase: (state, action) => {
+            const item = action.payload
+
+            const existItem = state.itemList.find((seen) => seen.id === item.id)
+          
+            existItem.qty++
             
-        }
+        
+        },
 
     }   
 

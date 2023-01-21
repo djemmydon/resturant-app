@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { cartActions } from "../redux/product";
 
 function NavCart({ handleOpen, open }) {
@@ -72,7 +73,11 @@ function NavCart({ handleOpen, open }) {
        
           <div  className=" flex flex-col items-center justify-center w-full mx-auto first-letter: font-small gap-4">
             <button className=" w-[250px] h-12 text-white text-xl font-bold border-2 mx-auto border-orangee bg-orangee hover:bg-white hover:text-black ease-in-out duration-200  ">Checkout</button>
-            <button className=" w-[250px] h-12 text-black border-2 mx-auto border-orangee  text-xl font-bold  hover:text-white hover:bg-orangee ease-in-out duration-200 ">View Cart</button>
+          <Link to="/cart">
+
+          <button className=" w-[250px] h-12 text-black border-2 mx-auto border-orangee  text-xl font-bold  hover:text-white hover:bg-orangee ease-in-out duration-200 ">View Cart</button>
+            
+          </Link>  
           </div>
       
       </div>

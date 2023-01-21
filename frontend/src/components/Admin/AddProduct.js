@@ -31,7 +31,7 @@ function AddProduct() {
     "Content-Type": "application/json",
   };
   const onSubmit = async (data) => {
-    axios.post("http://localhost:3001/createProduct", data).then((res) => {
+    axios.post("http://localhost:3001/auth/register", data).then((res) => {
       console.log(res.data);
     });
 
@@ -59,46 +59,39 @@ function AddProduct() {
           <div>
             {/* <label>Product Name</label> */}
             <input
-              placeholder="name"
+              placeholder="firstName"
               className=" border w-[300px] h-10 border-black"
-              {...register("name", { required: true })}
+              {...register("firstName", { required: true })}
+            />
+            <input
+              placeholder="lastName"
+              className=" border w-[300px] h-10 border-black"
+              {...register("lastName", { required: true })}
+            />
+            <input
+              placeholder="email"
+              type="email"
+              className=" border w-[300px] h-10 border-black"
+              {...register("email", { required: true })}
+            />
+            <input
+              placeholder="password"
+              type="password"
+              className=" border w-[300px] h-10 border-black"
+              {...register("password", { required: true })}
             />
           </div>
           <div>
-            <input
-              placeholder="slug"
-              className=" border w-[300px] h-10 border-black"
-              name="slug"
-              {...register("slug", { required: true })}
-            />
-          </div>
-          <div>
-            <input
-              placeholder="price"
-              type="number"
-              className=" border w-[300px] h-10 border-black"
-              name="price"
-              {...register("price", { required: true })}
-            />
-          </div>
-
-          <div>
-            <input
-              placeholder="Cateroy name"
-              className=" border w-[300px] h-10 border-black"
-              name="category"
-              {...register("category", { required: true })}
-            />
-          </div>
-          <div>
-            <input
-             
+            {/* <input
+              placeholder="picturePath"
               type="file"
-              placeholder="Cateroy name"
               className=" border w-[300px] h-10 border-black"
-              name="file"
-              {...register("file", { required: false })}
-            />
+              name="picturePath"
+              {...register("picturePath", { required: false })}
+            /> */}
+          </div>
+          <div>
+         
 
          
           </div>
