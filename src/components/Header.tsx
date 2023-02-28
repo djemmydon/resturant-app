@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 
-function Header({name, link}: {name:string, link: string}) {
-  return (
-      <Body>
+function Header({ name, link }: { name: string, link: string }) {
+    return (
+        <Body>
 
-          <div className="flex_body">
-              <div className="text">
-                  <h1>{ name}</h1>
-              </div>
+            <div className="flex_body">
+                <div className="text">
+                    <h1>{name}</h1>
+                </div>
 
-              <Link to={link}>
-              <button>View More</button>
-              </Link>
-          </div>
-          
-    </Body>
-  )
+                <Link to={link}>
+                    <button>View More</button>
+                </Link>
+            </div>
+
+        </Body>
+    )
 }
 
 export default Header
@@ -34,15 +34,31 @@ const Body = styled.div`
     border-bottom: 1px solid white;
     padding: 10px 0;
 
+    h1{
+    color: #010101;
+
+        @media screen and (max-width: 600px) {
+            font-size: 0.8rem;
+
+        }
+    }
     a{
         font-weight: 500;
 
+
         button{
     background-color: rgba(0, 0, 0, 0.105);
-    width: 130px;
-    height: 40px;
+    color: #010101;
+    width: 100px;
+    height: 30px;
     border-radius: 10px;
     transition: .5s;
+    font-size: 0.7rem;
+
+    @media screen and (max-width: 600px) {
+        width: 110px;
+    height: 30px;
+        }
 
         }
     }

@@ -13,9 +13,9 @@ function NavCart({ handleOpen, open }) {
     dispatch(cartActions.removeCart({ id: item.id }));
   };
 
-  const openn = "absolute z-10 top-0  overflow-scroll ease-in-out duration-700";
+  const openn = "absolute z-10 top-0   overflow-scroll ease-in-out duration-700";
   return (
-    <div className={open ? `${openn} -right-full` : `${openn} right-0`}>
+    <div className={open ? `${openn} -right-full ` : `${openn} right-0`}>
       <div className=" absolute top-0 left-0 bg-gradient-to-b w-full hidden "></div>
       <div className="w-[350px] h-screen bg-white flex flex-col items-start gap-16">
         <div className=" flex justify-between px-5 items-center h-28 w-full">

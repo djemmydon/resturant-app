@@ -8,9 +8,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import authRouter from "./routes/auth.js"
-import { register } from "./contoller/auth.js";
-
+// import { register } from "./contoller/auth.js";
+import productRoutes from "./routes/product.routes.js";
 
 // config
 const __filename = fileURLToPath(import.meta.url);
@@ -19,20 +18,33 @@ dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({
+  limit: '50mb'
+}));
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(bodyParser.json({ limit: "500mb", extended: true }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "500mb",
+    extended: true,
+    parameterLimit: 100000,
+  })
+);
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 // file storage
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/assets");
+    cb(null, "public");
   },
 
   filename: function (req, file, cb) {
@@ -42,19 +54,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
-// Route with file 
-app.post("/auth/register",register)
-
+// Route with file
 
 //Routes
-// app.use("/auth", authRouter)
+// app.use("/api/v1/auth", authRouter)
+app.use("/api/v1/product", productRoutes);
 
 // Mongoose setup
 
 const PORT = process.env.PORT || 6001;
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGO_URL, {
+mongoose
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

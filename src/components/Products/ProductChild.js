@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { cartActions } from "../../redux/product";
 
@@ -28,12 +29,13 @@ function ProductChild({ item }) {
   console.log(carts);
   return (
     <Body key={item.id}>
-      <div className="image">
+      <Link to={`/products/${item._id}`}>
+       <div className="image">
         <img className=" " src={item.image} alt="product" />
-      </div>
+      </div> 
       <div className="flex_body">
         <div className="text">
-          <h1 className="">{item.name}</h1>
+          <h1 className="">{item.title}</h1>
 
           <p className="">
             {" "}
@@ -65,6 +67,8 @@ function ProductChild({ item }) {
           <button className="">Add To Cart</button>
         </div>
       </div>
+      </Link>
+     
     </Body>
   );
 }
@@ -72,25 +76,24 @@ function ProductChild({ item }) {
 export default ProductChild;
 
 const Body = styled.div`
-/* display: flex;
-flex-direction: column;
-justify-items: center;
-align-items: center; */
-border-radius: 10px;
-padding: 1rem 0;
-
-
+    border: 1px solid rgba(27,27,27,.1);
+    width: 300px;
 .image{
-      height: 300px;
-      width: 300px;
+      
       transition: .2s;
       margin-bottom: 0.5rem;
+      padding: 10px;
+      width: 100%;
+      height: 300px;
+    border: 1px solid rgba(27,27,27,.1);
+  background-color: #d8d8d8;;
 
  
       img{
         height: 100%;
         width: 100%;
         object-fit: cover;
+
       }
     }
   .flex_body{
@@ -102,45 +105,29 @@ padding: 1rem 0;
 
     .text{
 margin:0 1rem ;
+color: #010101;
 
+h1{
+  font-size: 0%.9rem;
+}
       p{
         font-size: 1rem;
-
+        color: #ed1d24;
         span{
           padding-right:0.4rem ;
           text-decoration: line-through;
           font-size: 0.7rem;
+          color: #a1d1d1;;
 
         }
       }
     }
 
-    .button{
-      display: flex;
-      justify-content: center;
-      margin: 0.4rem 1rem;
-      opacity: 0;
-      transition: .2s;
-      button{
-        background-color: #4e3333;
-        width: 100%;
-        height: 40px;
-      }
-    }
+  
 
     
 
   }
 
-  :hover {
-    background-color: rgba(0, 0, 0, 0.105);
-    border-radius: 10px;
 
-  }
-  :hover .button{
-    opacity: 1;
-  }
-  :hover .image{
-   transform: scale(1.06);
-  }
 `;

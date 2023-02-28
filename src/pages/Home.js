@@ -8,7 +8,7 @@ import ProductPage from "./ProductPage";
 
 function Home() {
   return (
-    <div className=" w-full  ">
+    <div className=" ">
       <Main />
      <Header name="Featured Product" link="/"  />
       <ProductPage />

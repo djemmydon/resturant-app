@@ -1,45 +1,62 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  EffectFade,
+} from "swiper";
 import styled, { keyframes } from "styled-components";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 function Main() {
   return (
     <Body>
       <Swiper
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
+        onSlideChange={() => console.log("")}
         onSwiper={(swiper) => console.log(swiper)}
         autoplay={{
-          delay: 2500,
+          delay: 6000,
           disableOnInteraction: false,
         }}
-        pagination={true}
-        mousewheel={true}
+        navigation={true}
+        pagination={{
+          clickable: true,
+        }}
         keyboard={true}
-        modules={[Autoplay,Navigation, Pagination, Mousewheel, Keyboard]}
+        modules={[
+          Autoplay,
+          Navigation,
+          Pagination,
+          Mousewheel,
+          Keyboard,
+          EffectFade,
+        ]}
         className="my_swipe"
       >
-      <SwiperSlide className="swipBody">
-        <div className="flex_item">
-          <div className="text_side">
-            <p>Complete Your Look !</p>
-            <h2>TNew Men's Accessories</h2>
-            <span>Sneakers, Keds, Sweatshirts, Hoodies & much more...</span>
-            <div className="button">
-              <button>{`Shop Now >`}</button>
+        <SwiperSlide className="swipBody">
+          <div className="flex_item">
+            <div className="text_side">
+              <p>Complete Your Look !</p>
+              <h2>TNew Men's Accessories</h2>
+              <span>Sneakers, Keds, Sweatshirts, Hoodies & much more...</span>
+              <div className="button">
+                <button>{`Shop Now >`}</button>
+              </div>
+            </div>
+            <div className="img">
+              <img src="/img/03.png" alt="" />
             </div>
           </div>
-          <div className="img">
-            <img src="/img/03.png" alt="" />
-          </div>
-        </div>
         </SwiperSlide>
-        
+
         <SwiperSlide className="swipBody">
           <div className="flex_item">
             <div className="text_side">
@@ -71,7 +88,6 @@ function Main() {
             </div>
           </div>
         </SwiperSlide>
-
       </Swiper>
     </Body>
   );
@@ -96,7 +112,7 @@ from{
     
   }
   }
-`
+`;
 
 const Body = styled.div`
   height: 100vh;
@@ -104,46 +120,67 @@ const Body = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 10rem;
-  
+  background-color: rgb(27, 27, 27);
 
   @media screen and (max-width: 700px) {
-      
     height: 100%;
-
-
-          
-        }
+  }
   .my_swipe {
-    width:1000px!important;
+    width: 100% !important;
 
     height: 100%;
     display: flex;
     justify-content: center !important;
     align-items: center !important;
 
-    .swiper-pagination-bullet{
+    .swiper-pagination-bullet {
       background-color: #ffffff;
       transition: 0.5s;
-
     }
 
-    .swiper-pagination-bullet-active{
+    .swiper-pagination-bullet-active {
       width: 40px;
       height: 5px;
       border-radius: 1px;
     }
-
+    .swiper-slide {
+      opacity: 0;
+    }
     .swiper-slide-active {
-      img{
+      opacity: 1;
+      img {
         animation: ${rotate} 4s linear infinite;
       }
     }
   }
+
+  .swiper-button-next,.swiper-button-prev {
+    padding: 19px;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 100px;
+    border: 10px solid #111;
+    transition: 0.5s;
+
+
+    &:hover{
+      border: 10px solid white;
+    }
+
+
+  }
+  .swiper-button-next:after,  .swiper-button-prev:after {
+    color: #000000 !important;
+    font-size: 25px;
+
+    text-align: center;
+
+    /* font-family: 'Courier New', Courier, monospace!important; */
+  }
   .swipBody {
-    width: 100% !important;
-    height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     align-items: center;
 
     @media screen and (max-width: 1200px) {
@@ -152,48 +189,36 @@ const Body = styled.div`
     }
     @media screen and (max-width: 1000px) {
       width: 100% !important;
-
-          
-        }
+    }
 
     .flex_item {
       display: flex;
-      width: 100%;
-      height: 100%;
       align-items: center !important;
-      justify-items: space-between !important;
+      justify-items: center !important;
       margin: 0;
       @media screen and (max-width: 700px) {
         flex-direction: column;
       }
 
-      @media screen and (max-width: 700px) {
-        justify-content: center !important;
-
-
-          
-        }
       .text_side {
-        width: 500px;
+        width: 600px;
         display: block;
         @media screen and (max-width: 1200px) {
           width: 400px;
         }
 
         @media screen and (max-width: 1000px) {
-     display: none;
-
-          
+          display: none;
         }
         p {
-          font-size: 1.5rem;
+          font-size: 1rem;
           font-weight: 600;
           color: white;
           margin: 0;
           padding: 0;
         }
         h2 {
-          font-size: 2.5rem;
+          font-size: 3.5rem;
           font-weight: 600;
           color: white;
           margin: 0;
@@ -208,6 +233,7 @@ const Body = styled.div`
         }
 
         .button {
+          margin-top: 1rem;
           button {
             color: white;
             background-color: #353232;
@@ -223,17 +249,19 @@ const Body = styled.div`
         }
       }
       .img {
-        height: 500px;
+        height: 600px;
         @media screen and (max-width: 1200px) {
           height: 300px;
         }
         @media screen and (max-width: 1000px) {
           height: 600px;
-          
         }
         @media screen and (max-width: 600px) {
           height: 400px;
-          
+          width: 100%;
+        }
+        @media screen and (max-width: 400px) {
+          height: 300px;
         }
         img {
           height: 100%;

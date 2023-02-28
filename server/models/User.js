@@ -20,6 +20,10 @@ const UserSChema = new mongoose.Schema(
             max: 50,
             unique: true
         },
+        image: {
+            type: String,
+            default: "",
+        },
         password: {
             type: String,
             required: true,
@@ -35,5 +39,5 @@ const UserSChema = new mongoose.Schema(
     
 )
 
-const User = mongoose.model("User ", UserSChema)
+const User = mongoose.model("User", UserSChema)
  export default User

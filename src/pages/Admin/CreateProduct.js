@@ -1,41 +1,58 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+// import { useForm } from "react-hook-form";
+// import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-function Register() {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-  const [image, setImage] = useState('')
-  const [password, setPassword] = useState("")
-
-
-  const handleImage = (e) => {
-    setImage(e.target.files[0])
-    console.log(image)
-  }
+import ClipLoader from "react-spinners/ClipLoader";
+function CreateProduct() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [color, setColor] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState({ name: "", url: "" });
+  const [loading, setLoading] = useState(false);
 
   console.log(image);
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    // const data = { firstName, lastName, email, password}
+  const handleImageChange = (file) => {
+    const reader = (readFile) =>
+      new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.onload = () => resolve(fileReader.result);
+        fileReader.readAsDataURL(readFile);
+      });
 
-    const formData = new FormData()
-    formData.append("firstName", firstName)
-    formData.append("lastName", lastName)
-    formData.append("password", password)
-    formData.append("email", email)
-    formData.append("image", image)
-    axios
-      .post("http://localhost:3001/auth/register", formData)
-      .then((res) => {
-        console.log(res.data);
+    reader(file).then((result) => setImage({ name: file?.name, url: result }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const items = {
+      image: image.url,
+      title,
+      color,
+      price,
+      description,
+    };
+
+    setLoading(true);
+
+    await axios
+      
+      .post("http://localhost:3001/api/v1/product", items, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .catch((err) => {
-        console.log(err);
+      .then((res) => {
+        try {
+
+          if (res.status) {
+            setLoading(false);
+          }
+        } catch (error) {
+          console.log(res.status.message);
+        }
       });
   };
   return (
@@ -47,29 +64,39 @@ function Register() {
 
         <form action="" onSubmit={onSubmit}>
           <div className="input_body">
-            <label htmlFor="">First Name</label>
+            <label htmlFor="">title</label>
             <input
               placeholder="e.g Adenike"
               type="text"
-              value={firstName} onChange={(e) => setFirstName(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="input_body">
-            <label htmlFor="">Last Name</label>
+            <label htmlFor="">Description</label>
             <input
               placeholder="e.g Emeka"
               type="text"
-              value={lastName} onChange={(e) => setLastName(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
 
+          <div className="input_body">
+            <label htmlFor="">price</label>
+            <input
+              placeholder="e.g Emeka"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <div className="input_body">
-            <label htmlFor="">Email</label>
+            <label htmlFor="">color</label>
             <input
               placeholder="e.g johndoe@gmail.com"
-              type="email"
-              value={email} onChange={(e) => setEmail(e.target.value)}
-
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
             />
           </div>
           <div className="input_body">
@@ -78,37 +105,24 @@ function Register() {
               placeholder="e.g johndoe@gmail.com"
               type="file"
               name="image"
-            onChange={handleImage}
-
+              onChange={(e) => handleImageChange(e.target.files[0])}
             />
           </div>
-          <div className="input_body">
-            <label htmlFor="">Password</label>
-            <input
-              placeholder="e.g MyPassword321"
-              type="password"
-              value={password} onChange={(e) => setPassword(e.target.value)}
 
-            />
-          </div>
           <div className="submit">
             <button type="submit">
-              <p>Submit</p>
+              <p>
+                {loading ? <ClipLoader size={20} color="#fff" /> : "Submit"}
+              </p>
             </button>
           </div>
         </form>
-
-        <div className="account">
-          <p>
-            Already has an account <Link to="/login">Login</Link>
-          </p>
-        </div>
       </div>
     </Body>
   );
 }
 
-export default Register;
+export default CreateProduct;
 
 const Body = styled.div`
   padding: 10rem 0;
@@ -126,12 +140,11 @@ const Body = styled.div`
     width: 500px;
     margin: 0 auto;
     @media screen and (max-width: 600px) {
-        width: 330px;
+      width: 330px;
     }
   }
   form {
     width: 100%;
- 
 
     display: flex;
     flex-direction: column;
@@ -143,9 +156,8 @@ const Body = styled.div`
       display: flex;
       flex-direction: column;
       gap: 5px;
-      width:100%;
+      width: 100%;
 
-   
       input {
         border: 2px solid #f19b07a9;
         width: 100%;
@@ -214,7 +226,7 @@ const Body = styled.div`
       color: #ff7700;
       transition: 0.4s;
 
-      :hover{
+      :hover {
         text-decoration: underline;
       }
     }
