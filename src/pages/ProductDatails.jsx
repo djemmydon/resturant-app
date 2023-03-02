@@ -1,13 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import ProductChild from "../components/Products/ProductChild";
+import Products from "../components/Products/Products";
+import { cartActions } from "../redux/product";
 
 function ProductDatails() {
   const { id } = useParams();
-
   const [data, setData] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [qty, setQty] = useState(1);
+  const disptch = useDispatch();
 
+  const onAddToCart = (data) => {
+    const totalPrice = qty * data.price;
+
+    disptch(cartActions.addToCart({ ...data, qty, totalPrice }));
+
+    setQty(1);
+  };
   useEffect(() => {
     const fetch = async () => {
       await axios
@@ -16,8 +30,16 @@ function ProductDatails() {
           setData(res.data);
         });
     };
-
     fetch();
+  });
+
+  useEffect(() => {
+    const peoplesLike = async () => {
+      await axios.get(`http://localhost:3001/api/v1/product`).then((res) => {
+        setProduct(res.data);
+      });
+    };
+    peoplesLike();
   });
 
   return (
@@ -40,14 +62,25 @@ function ProductDatails() {
           <hr />
 
           <BoxCart>
-            <input type="number" defaultValue="0" />
+            <input
+              type="number"
+              value={qty}
+              onChange={(e) => setQty(e.target.value)}
+            />
 
-            <button>Add To Cart</button>
+            <button onClick={() => onAddToCart(data)}>Add To Cart</button>
           </BoxCart>
 
           <hr />
         </BoxText>
       </Flex>
+
+      <div className="text-center mt-14">
+        <h2>People Also Like</h2>
+      </div>
+      <div>
+        <Products fetch={product} />
+      </div>
     </Body>
   );
 }
@@ -78,8 +111,8 @@ const BoxImage = styled.div`
   height: 500px;
 
   @media screen and (max-width: 1200px) {
-    height: 400px;
     width: 400px;
+    height: 400px;
   }
 
   @media screen and (max-width: 900px) {
@@ -118,9 +151,10 @@ const BoxText = styled.div`
     width: 400px;
   }
 
-  @media screen and (max-width: 500px) {
-    width: 300px;
-    height: 300px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    padding: 0 15.5px;
+    height: 100%;
   }
 `;
 

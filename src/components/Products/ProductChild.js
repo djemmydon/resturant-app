@@ -26,7 +26,6 @@ function ProductChild({ item }) {
     setQty(1);
   };
 
-  console.log(carts);
   return (
     <Body key={item.id}>
       <Link to={`/products/${item._id}`}>

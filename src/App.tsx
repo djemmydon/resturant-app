@@ -11,31 +11,33 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateProduct from './pages/Admin/CreateProduct';
 import ProductDatails from './pages/ProductDatails';
+import Product from './pages/Product';
 
 
 function App() {
-  
+
 
 
   return (
-    <div className="App">
+    <div className="App relative">
       <BrowserRouter>
-      
+
         <Navbar />
-        
+
         <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/products' element={<ProductPage />}/>
-          <Route path='/admin/addproduct' element={<Admin />}/>
-          <Route path='/cart' element={<CartPage />}/>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/register' element={<Register />}/>
-          <Route path='/create-product' element={<CreateProduct />}/>
-          <Route path='/products/:id' element={<ProductDatails />}/>
+          <Route path='/' element={<Home />} />
+          <Route path='/products' element={<ProductPage />} />
+          <Route path='/admin/addproduct' element={<Admin />} />
+          <Route path='/cart' element={<CartPage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/create-product' element={<CreateProduct />} />
+          <Route path='/products/' element={<Product />} />
+          <Route path='/products/:id' element={<ProductDatails />} />
         </Routes>
-      
-       
-        </BrowserRouter>
+
+
+      </BrowserRouter>
     </div>
   );
 }
