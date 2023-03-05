@@ -2,177 +2,335 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../redux/product";
+import Products from "./Products/Products";
+import { useNavigate } from "react-router-dom";
+
 
 function Cart() {
-  const [booking, setBooking] = useState([]);
-
   const cart = useSelector((state) => state.cart.itemList);
   const total = useSelector((state) => state.cart.allTotalPrice);
+  const navigate = useNavigate()
 
   const disptch = useDispatch();
   return (
     <Body>
-      <h1>Carts</h1>
+      <TemplateBody>
+        <Template2>
+          <div className="header">
+            <h2>Shop</h2>
 
-      <div className="t_body">
-        <table>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+            <div className="header_flex"></div>
+          </div>
 
-          <tbody>
-            <>
+          {/*  Sending property  to it child*/}
+          <div>
+            {cart.length === 0 && (
+              <div className="text-center flex items-center justify-center w-full h-[200px]">
+                <h1>Loading 😊😊</h1>
+              </div>
+            )}
+
+            {cart.length == null && (
+              <div className="text-center flex items-center justify-center w-full h-[200px]">
+                <h1>Something Went Wrong 😒😒😒</h1>
+              </div>
+            )}
+
+            <div className="product_body">
               {cart.map((item) => (
-                <tr>
-                  <td>
-                    <h2 className=" text-2xl">{item.name}</h2>
-                    <p>Flour, Pastries and Sugar</p>
-                  </td>
-                  <td className=" text-xl">{item.price.toLocaleString()}.00</td>
-                  <td>
-                    {" "}
-                    <div className="flex text-center gap-2 ">
-                      <div className=" w-4 h-4 pb-8 rounded  bg-orangee text-white flex justify-center content-center cursor-pointer ">
-                        <span className="text-2xl w-full pb-6  cursor-pointer  ">
-                          -
-                        </span>
-                      </div>
-                      <div className=" w-6  bg-white flex justify-center content-center cursor-pointer">
-                        <span className="text-2xl w-full h-full cursor-pointer ">
-                          {item.qty}
-                        </span>
-                      </div> 
-                      <div
-                        className=" w-4 h-4 pb-8 rounded text-white bg-orangee flex justify-center content-center cursor-pointer"
-                    onClick={() => disptch(cartActions.increase({qty:item.qty}))}
-                      >
-                        <span className="   text-2xl w-full h-full cursor-pointer ">
-                          +
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className=" text-xl">
-                    {item.price.toLocaleString(item.id)}.00
-                  </td>
-
-                  <td
-                        onClick={() => disptch(cartActions.removeCart({id:item.id}))}
-                  
-                      >
-                    <span class="material-symbols-outlined">delete</span>
-                  </td>
-                </tr>
+                <CartProduct item={item} />
               ))}
-            </>
-          </tbody>
-        </table>
-      </div>
+            </div>
+          </div>
 
-      <div></div>
+          <div className="button_back">
+            <button
+            onClick={() => navigate("/products")}
+            >{"<  Countinue Shopping"}</button>
+          </div>
+        </Template2>
+        <Template1>
+          <Shop />
+        </Template1>
+      </TemplateBody>
     </Body>
   );
 }
 
 export default Cart;
 
+const Shop = () => {
+  return (
+    <ShopBody>
+      <div className="header">
+        <h2>Shop</h2>
+      </div>
+
+      <div className="shop_body">
+        <div className="shop_item">
+          Computer & Laptop
+          <span class="material-symbols-outlined">chevron_right</span>
+          {/* <div className="child">
+                      <div>
+                          <p>Hp Laptop</p>
+                      </div>
+                      <div>
+                          <p>Lenovo Laptop</p>
+                      </div>
+                      <div>
+                          <p>Dell Monitors</p>
+                      </div>
+                      <div>
+                          <p>Mac Computer</p>
+                      </div>
+              </div> */}
+        </div>
+        <div className="shop_item">
+          Cameta & Photo
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+        <div className="shop_item">
+          Audio & Home
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+        <div className="shop_item">
+          SmartPhone & Ipad
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+      </div>
+    </ShopBody>
+  );
+};
+const CartProduct = ({ item }) => {
+  const [qty, setQty] = useState(item.qty);
+
+  return (
+    <CartBody>
+      <div className="img">
+        <img src={item.image} alt="" />
+      </div>
+      <div className="text">
+        <h2>{item.title}</h2>
+        <h3>{item.price}</h3>
+      </div>
+      <div className="control_form">
+        <input
+          type="number"
+          value={qty}
+          onChange={(e) => setQty(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <p>{item.totalPrice}</p>
+      </div>
+
+      <div>
+        <span class="material-symbols-outlined">delete</span>
+      </div>
+    </CartBody>
+  );
+};
+
 const Body = styled.div`
-  /* display: flex; */
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: center;
-  /* flex-direction: column; */
-  height: 100vh;
+  height: 100%;
+  width: 100%;
+  padding-top: 10rem;
+`;
+const TemplateBody = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 20px;
+  padding: 1rem;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
+`;
+const Template1 = styled.div`
   width: 700px;
-  font-family: "Montserrat", sans-serif;
-  overflow: hidden;
-  padding-top: 8rem;
-  margin: 0 auto;
-  h1 {
-    font-size: 1.4rem;
-    color: #002d80;
-    position: relative;
-    margin: 2rem auto;
+  height: 100%;
+  margin: 10px;
 
-    display: flex;
-    justify-content:center;
+  @media screen and (max-width: 900px) {
+    margin: 0px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 400px) {
+  }
+`;
+const Template2 = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+  @media screen and (max-width: 900px) {
+    margin: 0px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 400px) {
+  }
 
-    &::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 2px;
-      background: #f14105;
-      top: 35px;
+  .header {
+    border: 1px solid gray;
+    h2 {
+      margin-left: 10px;
+      padding: 0.5rem;
+      border-bottom: 2px solid red;
+      width: min-content;
     }
   }
-  .t_body {
-    width: 100%;
-    overflow-x: scroll;
 
-    table {
-      width: 100%;
-      user-select: none;
-      font-size: 0.8rem;
-      border-collapse: collapse;
-      font-family: "Montserrat", sans-serif;
+  .button_back {
+    margin-top: 10px;
+    button {
+      width: 200px;
+      height: 50px;
+      font-size: .7rem;
+      color: #fff;
+      background-color: #ed1d24;
+      border-color: #ed1d24;
+      text-transform: uppercase;
+      transition: .3s;
 
-      overflow-x: scroll;
+      :hover{
+      background-color: #ed1d50;
 
-      thead {
-        /* background-color: red; */
-        color: black;
-        border-radius: 10px;
-      }
-
-      thead tr th {
-        padding: 10px 13px;
-        font-weight: 300;
-        white-space: nowrap;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
-
-        @media screen and (max-width: 500px) {
-          padding: 3px 3px;
-          font-size: 0.6rem;
-        }
       }
     }
-    tbody {
-      border-radius: 10px;
-    }
+  }
+  .header_flex {
+    display: flex;
+    align-content: center;
+    padding: 10px;
 
-    tbody tr td {
-      padding: 10px 10px;
-      font-weight: 300;
-      white-space: nowrap;
-      background-color: white;
-      border-bottom: 3px solid grey;
-      transition: 0.6s;
-      font-family: "Montserrat", sans-serif;
-      font-weight: 600;
+    img {
+      height: 130px;
+
       @media screen and (max-width: 500px) {
-        padding: 5px 5px;
-        font-size: 0.6rem;
+        display: none;
       }
     }
-    .checked {
-      text-decoration: line-through;
+
+    p {
       font-weight: 600;
+      color: gray;
     }
   }
 
-  .loading {
-    width: 100%;
-    margin: 0 auto;
+  .product_body {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 25px 0;
+    border-bottom: 0.5px solid #000;
+    border-left: 0.5px solid #000;
+    border-right: 0.5px solid #000;
+  }
+`;
+
+const ShopBody = styled.div`
+  border: 1px solid gray;
+
+  .header {
+    border-bottom: 1px solid gray;
+    padding: 5px 10px;
+  }
+
+  .shop_body {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .shop_item {
+      transition: 0.4s;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      span {
+        opacity: 0;
+        transition: 0.4s;
+      }
+
+      :hover {
+        padding-left: 10px;
+        color: red;
+      }
+
+      :hover span {
+        opacity: 1;
+      }
+
+      .child {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        top: 0;
+      }
+    }
+  }
+`;
+
+const CartBody = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .img {
+    height: 120px;
+    background-color: #d8d8d8;
+
+    @media screen and (max-width: 600px) {
+      height: 60px;
+    }
+    @media screen and (max-width: 400px) {
+    }
+    img {
+      height: 100%;
+    }
+  }
+
+  .text {
+    h2 {
+      font-size: 0.8rem;
+    }
+    h3 {
+      color: #ed1d24;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    @media screen and (max-width: 600px) {
+      h2 {
+        font-size: 0.8rem;
+      }
+      h3 {
+        font-size: 1rem;
+      }
+    }
+    @media screen and (max-width: 400px) {
+    }
+  }
+
+  .control_form {
+    input {
+      border: 1px solid #101010;
+      width: 100px;
+      height: 40px;
+      font-size: 1rem;
+      padding: 10px;
+
+      @media screen and (max-width: 600px) {
+        width: 80px;
+        height: 30px;
+      }
+      @media screen and (max-width: 400px) {
+      }
+    }
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+
 import Slider from "react-slick";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 function Category() {
   const settings = {
-    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
@@ -15,20 +14,12 @@ function Category() {
     className: "body_swipe",
     responsive: [
       {
-        breakpoint: 300,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
 
-        breakpoint: 1024,
+        breakpoint: 2000,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+      
         },
       },
       {
@@ -37,13 +28,6 @@ function Category() {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
         },
       },
     ],
@@ -69,8 +53,8 @@ function Category() {
 export default Category;
 
 const Body = styled.div`
-  margin: 2rem auto;
-  width: 1000px;
+  margin: 6rem auto;
+  max-width: 100%;
   /* display: flex; */
   align-items: center;
 
@@ -81,18 +65,36 @@ const Body = styled.div`
     justify-content: center;
    
   } */
+
+  .slick-next{
+    right: 0;
+  }
+  .slick-prev{
+    left: 0;
+  }
+
 .body_swipe{
 display: flex !important;
+max-width: 100%;
+}
+
+.slick-slide{
+  width: 300px!important;
+  margin: 0 0rem;
 }
   .swipe {
-    max-width: 100%;
+    width: 200px!important;
     height: 200px;
     padding: 0 1rem;
-    border:solid 1px wheat;
     border-radius: 10px;
-    margin: 0 50px;
+    margin: 0 0px;
     img {
-      background-color: red;
+      margin: 0 auto;
+    }
+
+    p{
+      font-size: 1rem;
+      text-align: center;
     }
 
     @media screen and (max-width: 600px) {
@@ -125,20 +127,17 @@ const data = [
     image: "/img/06.png",
   },
   {
-    name: "Fashion",
-    image: "/img/06.png",
-  },
-  {
-    name: "Fashion",
-    image: "/img/06.png",
-  },
-  {
     name: "Watches",
     image: "/img/07.png",
   },
   {
     name: "Shoes",
     image: "/img/03.png",
+  },
+  
+  {
+    name: "Watches",
+    image: "/img/07.png",
   },
   {
     name: "Bags",
@@ -147,5 +146,10 @@ const data = [
   {
     name: "Head Phones",
     image: "/img/10.png",
+  },
+  
+  {
+    name: "Watches",
+    image: "/img/07.png",
   },
 ];

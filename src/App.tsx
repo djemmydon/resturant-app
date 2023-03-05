@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import CreateProduct from './pages/Admin/CreateProduct';
 import ProductDatails from './pages/ProductDatails';
 import Product from './pages/Product';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
           <Route path='/products/:id' element={<ProductDatails />} />
         </Routes>
 
-
+        <Footer />
       </BrowserRouter>
     </div>
   );

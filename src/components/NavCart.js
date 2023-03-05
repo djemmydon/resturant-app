@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { cartActions } from "../redux/product";
@@ -20,7 +20,7 @@ function NavCart({ handleOpen, open }) {
       <div className="w-[350px] h-screen bg-white flex flex-col items-start gap-16">
         <div className=" flex justify-between px-5 items-center h-28 w-full">
           <div>
-            <h4 className=" text-xl text-orangee font-bold">Shopping Cart</h4>
+            <h4 className=" text-xl text-[#ed1d24] font-bold">Shopping Cart</h4>
           </div>
           <div
             onClick={handleOpen}
@@ -31,13 +31,14 @@ function NavCart({ handleOpen, open }) {
         </div>
 
         <div className="flex flex-col gap-2 items-center justify-center w-full ">
-          {!cart.length ? (
+          {!cart?.length ? (
+             
             <div className="animate-bounce">
               <h1 className=" text-xl font-bold"> Your Cart Is Empty</h1>
             </div>
           ) : (
-            cart.map((item) => (
-              <div key={item.id} className="flex justify-around w-full  ">
+            cart?.map((item) => (
+              <div key={item._id} className="flex justify-around w-full  ">
                 <div className=" h-12 flex gap-10 justify-around items-center ">
                   <img className="h-full" src={item.image} alt={item.image} />
                 </div>
@@ -60,7 +61,7 @@ function NavCart({ handleOpen, open }) {
 
         <div className=" flex justify-between px-5 items-center h-28 w-full border-t-2 border-b-2">
           <div>
-            <h4 className=" text-xl text-orangee font-bold">Shopping Cart</h4>
+            <h4 className=" text-xl text-[#ed1d24] font-bold">Shopping Cart</h4>
           </div>
           <div className="  text-center text-grey">
             <span className="font-bold text-2xl">
@@ -72,10 +73,10 @@ function NavCart({ handleOpen, open }) {
        
        
           <div  className=" flex flex-col items-center justify-center w-full mx-auto first-letter: font-small gap-4">
-            <button className=" w-[250px] h-12 text-white text-xl font-bold border-2 mx-auto border-orangee bg-orangee hover:bg-white hover:text-black ease-in-out duration-200  ">Checkout</button>
+            <button className=" w-[250px] h-12 text-white text-xl font-bold border-2 mx-auto border-[#ed1d24] bg-[#ed1d24] hover:bg-white hover:text-black ease-in-out duration-200  ">Checkout</button>
           <Link to="/cart">
 
-          <button className=" w-[250px] h-12 text-black border-2 mx-auto border-orangee  text-xl font-bold  hover:text-white hover:bg-orangee ease-in-out duration-200 ">View Cart</button>
+          <button className=" w-[250px] h-12 text-black border-2 mx-auto border-[#ed1d24]  text-xl font-bold  hover:text-white hover:bg-[#ed1d24] ease-in-out duration-200 ">View Cart</button>
             
           </Link>  
           </div>

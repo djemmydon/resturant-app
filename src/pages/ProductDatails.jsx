@@ -22,10 +22,15 @@ function ProductDatails() {
 
     setQty(1);
   };
+
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get(`http://localhost:3001/api/v1/product/${id}`)
+        .get(`http://localhost:3001/api/v1/product/${id}`, {
+          headers: {
+            "Content-Type": "application/json, text/plain",
+          },
+        })
         .then((res) => {
           setData(res.data);
         });

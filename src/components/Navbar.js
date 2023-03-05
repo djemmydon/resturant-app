@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavCart from "./NavCart";
 import styled from "styled-components";
+import { cartActions } from "../redux/product";
 
-const link = " text-orangee";
+
 
 // className={`${link}`}
 
 function Navbar() {
   const [search, setSearch] = useState(false);
-  const cart = useSelector((state) => state.cart);
-  const { totalQty } = cart;
+  // const cart = useSelector((state) => state.cart);
+  const totalItems = useSelector((state) => state.cart.totalQty);
+  const dispatch = useDispatch()
 
   const [open, setOpen] = useState(true);
   const [nav, setNav] = useState(false);
@@ -23,6 +25,12 @@ function Navbar() {
   const handleOpenNav = () => {
     setNav(!nav);
   };
+
+
+  // useEffect(() => {
+  //   dispatch(cartActions.getCartTotal())
+  // }, [dispatch])
+  
   return (
     <>
       <nav className=" relative h-full ">
@@ -33,7 +41,7 @@ function Navbar() {
                 <div className="w-full ">
                   <div className="float-right p-5 cursor-pointer">
                     <span
-                      class="material-symbols-outlined text-3xl"
+                      className="material-symbols-outlined text-3xl"
                       onClick={() => setSearch(!search)}
                     >
                       close
@@ -55,7 +63,7 @@ function Navbar() {
           </>
         
 
-        <div className=" bg-[#ed1d24] text-white w-full h-28 flex items-center justify-between md:justify-around fixed z-20 bg-white">
+        <div className=" bg-[#ed1d24] text-white w-full h-28 flex items-center justify-between md:justify-around fixed z-20 ">
           <div className=" h-16 flex flex-col items-center">
             <img className="h-full" src={Logo} alt="" />
             {/* <span className="text-orangee text-2xl font-bold">YuMmY</span> */}
@@ -69,7 +77,7 @@ function Navbar() {
               <li className=" group text-md  text-[#fff] transition ease-in-out hover:text-orangee">
                 <Link to="/">
                   Shop
-                  <ul className="absolute hidden group-hover:block transition-all w-[200px] bg-white">
+                  <ul className="absolute hidden group-hover:block transition-all w-[200px] shadow bg-white">
                     <li className="text-[#ed1d24] hover:text-orangee hover:ease-in-out hover:duration-300 text-sm p-2 hover:bg-white text-orange">
                       <Link>Sharwama</Link>
                     </li>
@@ -105,9 +113,9 @@ function Navbar() {
                 className=" flex flex-col justify-center items-center cursor-pointer relative"
               >
                 <span className=" absolute w-4 h-4 rounded-full -right-1 -top-0 text-center text-xs bg-[#fff] text-[#ed1d24]    cursor-pointer">
-                  {totalQty}
+                  {totalItems}
                 </span>
-                <span class="material-symbols-outlined text-2xl">
+                <span className="material-symbols-outlined text-2xl">
                   shopping_cart
                 </span>
               </div>
@@ -178,6 +186,7 @@ export default Navbar;
 const Search = styled.div`
   /* bg-white flex flex-col justify-center px-10 py-5 z-40 w-full h-screen absolute top-0 right-0  ; */
   transition: 1s;
+  
 
   .search {
     background-color: white;
@@ -188,7 +197,7 @@ const Search = styled.div`
     z-index: 40;
     width: 100%;
     height: 0vh;
-    position: absolute;
+    position: fixed;
     top: -10rem;
     right: 0;
     transition: 0.5s ease;

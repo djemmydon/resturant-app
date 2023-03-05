@@ -76,7 +76,7 @@ export default ProductChild;
 
 const Body = styled.div`
     border: 1px solid rgba(27,27,27,.1);
-    width: 300px;
+    width: 100%;
 .image{
       
       transition: .2s;
@@ -87,7 +87,10 @@ const Body = styled.div`
     border: 1px solid rgba(27,27,27,.1);
   background-color: #d8d8d8;;
 
- 
+  @media screen and (max-width: 500px) {
+    height: 200px;
+
+  }
       img{
         height: 100%;
         width: 100%;

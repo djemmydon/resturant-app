@@ -14,7 +14,7 @@ function Products({ fetch }) {
 export default Products;
 
 const Body = styled.div`
-  padding: 3rem 0;
+  padding: 3rem 3rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   align-content: center;
@@ -25,6 +25,8 @@ const Body = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   @media screen and (max-width: 500px) {
-    grid-template-columns: repeat(auto-fit, minmax(1r, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding: 3rem 1rem;
+
   }
 `;

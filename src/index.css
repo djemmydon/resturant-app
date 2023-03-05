@@ -37,3 +37,7 @@ button{
   font-weight: 600;
 
 }
+
+.link_header{
+  border-bottom: 1px solid black;
+}

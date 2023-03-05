@@ -20,8 +20,6 @@ function Main() {
     <Body>
       <Swiper
         slidesPerView={1}
-        onSlideChange={() => console.log("")}
-        onSwiper={(swiper) => console.log(swiper)}
         autoplay={{
           delay: 6000,
           disableOnInteraction: false,
@@ -201,7 +199,7 @@ const Body = styled.div`
       }
 
       .text_side {
-        width: 600px;
+        width: 700px;
         display: block;
         @media screen and (max-width: 1200px) {
           width: 400px;
@@ -218,8 +216,9 @@ const Body = styled.div`
           padding: 0;
         }
         h2 {
-          font-size: 3.5rem;
+          font-size: 6.5rem;
           font-weight: 600;
+          line-height: 100px;
           color: white;
           margin: 0;
           padding: 0;
