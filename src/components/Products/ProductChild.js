@@ -29,20 +29,20 @@ function ProductChild({ item }) {
   return (
     <Body key={item.id}>
       <Link to={`/products/${item._id}`}>
-       <div className="image">
-        <img className=" " src={item.image} alt="product" />
-      </div> 
-      <div className="flex_body">
-        <div className="text">
-          <h1 className="">{item.title}</h1>
-
-          <p className="">
-            {" "}
-            <span> ${item.price}.00</span> ${item.price}.00
-          </p>
+        <div className="image">
+          <img className=" " src={item.image} alt="product" />
         </div>
+        <div className="flex_body">
+          <div className="text">
+            <h1 className="">{item.title}</h1>
 
-        {/* <div className="flex text-center gap-2 ">
+            <p className="">
+              {" "}
+              <span> ${item.price}.00</span> ${item.price}.00
+            </p>
+          </div>
+
+          {/* <div className="flex text-center gap-2 ">
           <div
             onClick={decrease}
             className=" w-6 h-6 pb-8 rounded  bg-orangee text-white flex justify-center content-center cursor-pointer "
@@ -62,12 +62,11 @@ function ProductChild({ item }) {
           </div>
         </div> */}
 
-        <div onClick={onAddToCart} className="button">
-          <button className="">Add To Cart</button>
+          <div onClick={onAddToCart} className="button">
+            <button className="">Add To Cart</button>
+          </div>
         </div>
-      </div>
       </Link>
-     
     </Body>
   );
 }
@@ -75,61 +74,49 @@ function ProductChild({ item }) {
 export default ProductChild;
 
 const Body = styled.div`
-    border: 1px solid rgba(27,27,27,.1);
+  border: 0.6px solid rgba(27, 27, 27, 0.1);
+
+  width: 100%;
+  .image {
+    transition: 0.2s;
+    margin-bottom: 0.5rem;
+    padding: 10px;
     width: 100%;
-.image{
-      
-      transition: .2s;
-      margin-bottom: 0.5rem;
-      padding: 10px;
-      width: 100%;
-      height: 300px;
-    border: 1px solid rgba(27,27,27,.1);
-  background-color: #d8d8d8;;
+    height: 300px;
+    background-color: #f3f2f2;
 
-  @media screen and (max-width: 500px) {
-    height: 200px;
-
-  }
-      img{
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-
-      }
+    @media screen and (max-width: 500px) {
+      height: 200px;
     }
-  .flex_body{
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .flex_body {
     display: flex;
     flex-direction: column;
     width: 100%;
     color: white;
 
+    .text {
+      margin: 0 1rem;
+      color: #010101;
 
-    .text{
-margin:0 1rem ;
-color: #010101;
-
-h1{
-  font-size: 0%.9rem;
-}
-      p{
+      h1 {
+        font-size: 0%.9rem;
+      }
+      p {
         font-size: 1rem;
         color: #ed1d24;
-        span{
-          padding-right:0.4rem ;
+        span {
+          padding-right: 0.4rem;
           text-decoration: line-through;
           font-size: 0.7rem;
-          color: #a1d1d1;;
-
+          color: #a1d1d1;
         }
       }
     }
-
-  
-
-    
-
   }
-
-
 `;

@@ -62,10 +62,34 @@ const cartSlice = createSlice({
       storeInLocalStorage(state.itemList);
     },
 
-    getCartTotal: (state, action) => {
+    getCartTotal: (state) => {
       state.allTotalPrice = state.itemList.reduce((cartTotal, cartItem) => {
         return (cartTotal += cartItem.totalPrice);
       }, 0);
+    },
+
+    updateCart: (state, action) => {
+      let tempCart = state.itemList.map((item) => {
+        if (item._id === action.payload._id) {
+          let tempQty = item.qty;
+          let tempTotalPrice = item.totalPrice;
+          if (action.payload.type === "INC") {
+            tempQty++;
+            tempTotalPrice = tempQty * item.price;
+          }
+
+          if (action.payload.type === "DEC") {
+            if (item.qty <= 1) tempQty = 1;
+            tempQty--;
+            tempTotalPrice = tempQty * item.price;
+          }
+
+          return { ...item, qty: tempQty, totalPrice: tempTotalPrice };
+        }
+      });
+
+      state.itemList = tempCart;
+      storeInLocalStorage(state.itemList);
     },
   },
 });

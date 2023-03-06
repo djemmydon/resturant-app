@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../redux/product";
-import Products from "./Products/Products";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import useTotal from "../redux/total";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.itemList);
-  const total = useSelector((state) => state.cart.allTotalPrice);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const disptch = useDispatch();
   return (
     <Body>
+      <div className="link_header">
+        <Link to="/">Home / </Link>
+        <p>Carts</p>
+      </div>
       <TemplateBody>
         <Template2>
           <div className="header">
@@ -38,19 +38,20 @@ function Cart() {
 
             <div className="product_body">
               {cart.map((item) => (
-                <CartProduct item={item} />
+                <CartProduct key={item._id} item={item} />
               ))}
             </div>
           </div>
 
           <div className="button_back">
-            <button
-            onClick={() => navigate("/products")}
-            >{"<  Countinue Shopping"}</button>
+            <button onClick={() => navigate("/products")}>
+              <span className="material-symbols-outlined">arrow_back_ios</span>
+              {" Countinue Shopping"}
+            </button>
           </div>
         </Template2>
         <Template1>
-          <Shop />
+          <Shop cart={cart} />
         </Template1>
       </TemplateBody>
     </Body>
@@ -59,7 +60,11 @@ function Cart() {
 
 export default Cart;
 
-const Shop = () => {
+const Shop = ({ cart }) => {
+  const { totalPrice, totalQty } = useTotal();
+
+  const overall = totalPrice + 7;
+
   return (
     <ShopBody>
       <div className="header">
@@ -68,41 +73,27 @@ const Shop = () => {
 
       <div className="shop_body">
         <div className="shop_item">
-          Computer & Laptop
-          <span class="material-symbols-outlined">chevron_right</span>
-          {/* <div className="child">
-                      <div>
-                          <p>Hp Laptop</p>
-                      </div>
-                      <div>
-                          <p>Lenovo Laptop</p>
-                      </div>
-                      <div>
-                          <p>Dell Monitors</p>
-                      </div>
-                      <div>
-                          <p>Mac Computer</p>
-                      </div>
-              </div> */}
+          <p>{totalQty} Item(s)</p>
+          <span>${totalPrice.toLocaleString()}.00</span>
         </div>
         <div className="shop_item">
-          Cameta & Photo
-          <span class="material-symbols-outlined">chevron_right</span>
+          <p>Shipping</p>
+          <span>$7.00</span>
         </div>
         <div className="shop_item">
-          Audio & Home
-          <span class="material-symbols-outlined">chevron_right</span>
+          <p>Total</p>
+          <span>{overall.toLocaleString()}</span>
         </div>
         <div className="shop_item">
-          SmartPhone & Ipad
-          <span class="material-symbols-outlined">chevron_right</span>
+          <p>{cart.length} Item(s)</p>
+          <span>${totalPrice.toLocaleString()}</span>
         </div>
       </div>
     </ShopBody>
   );
 };
 const CartProduct = ({ item }) => {
-  const [qty, setQty] = useState(item.qty);
+  const dispatch = useDispatch();
 
   return (
     <CartBody>
@@ -114,11 +105,24 @@ const CartProduct = ({ item }) => {
         <h3>{item.price}</h3>
       </div>
       <div className="control_form">
-        <input
-          type="number"
-          value={qty}
-          onChange={(e) => setQty(e.target.value)}
-        />
+        <span
+          className="material-symbols-outlined"
+          onClick={() =>
+            dispatch(cartActions.updateCart({ _id: item._id, type: "DEC" }))
+          }
+        >
+          remove
+        </span>
+
+        <span>{item.qty}</span>
+        <span
+          className="material-symbols-outlined"
+          onClick={() =>
+            dispatch(cartActions.updateCart({ _id: item._id, type: "INC" }))
+          }
+        >
+          add
+        </span>
       </div>
 
       <div>
@@ -135,7 +139,7 @@ const CartProduct = ({ item }) => {
 const Body = styled.div`
   height: 100%;
   width: 100%;
-  padding-top: 10rem;
+  padding-top: 7rem;
 `;
 const TemplateBody = styled.div`
   display: flex;
@@ -187,19 +191,27 @@ const Template2 = styled.div`
 
   .button_back {
     margin-top: 10px;
+    display: flex;
+    align-items: center;
     button {
       width: 200px;
       height: 50px;
-      font-size: .7rem;
+      font-size: 0.7rem;
       color: #fff;
       background-color: #ed1d24;
       border-color: #ed1d24;
       text-transform: uppercase;
-      transition: .3s;
+      transition: 0.3s;
 
-      :hover{
-      background-color: #ed1d50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
+      span {
+        font-size: 0.7rem;
+      }
+      :hover {
+        background-color: #ed1d50;
       }
     }
   }
@@ -247,29 +259,15 @@ const ShopBody = styled.div`
     flex-direction: column;
     gap: 10px;
     .shop_item {
-      transition: 0.4s;
-      cursor: pointer;
-      position: relative;
       display: flex;
+      justify-content: space-between;
+
+      p {
+        font-weight: 400;
+      }
       span {
-        opacity: 0;
-        transition: 0.4s;
-      }
-
-      :hover {
-        padding-left: 10px;
-        color: red;
-      }
-
-      :hover span {
-        opacity: 1;
-      }
-
-      .child {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        top: 0;
+        font-weight: 600;
+        color: grey;
       }
     }
   }
@@ -318,19 +316,16 @@ const CartBody = styled.div`
   }
 
   .control_form {
-    input {
-      border: 1px solid #101010;
-      width: 100px;
-      height: 40px;
-      font-size: 1rem;
-      padding: 10px;
+    display: flex;
+    gap: 1rem;
 
-      @media screen and (max-width: 600px) {
-        width: 80px;
-        height: 30px;
-      }
-      @media screen and (max-width: 400px) {
-      }
+    span {
+      border: 1px solid gray;
+      cursor: pointer;
+    }
+
+    span:nth-child(2) {
+      border: none;
     }
   }
 `;

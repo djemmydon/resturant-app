@@ -1,35 +1,34 @@
 import axios from "axios";
 import React from "react";
-import { Resolver, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import styled from "styled-components"; 
+import styled from "styled-components";
 
-type Login = {
-    
-    password: string,
-    email: string
+type Logins = {
+
+  password: string,
+  email: string
 }
 
 function Login() {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Login>();
+    
+  } = useForm<Logins>();
 
-    const onSubmit = handleSubmit(
-        (data) => {
-            axios
-              .post("http://localhost:3001/auth/register", data)
-              .then((res) => {
-                console.log(res.data);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-    ) 
+  const onSubmit = handleSubmit(
+    (data) => {
+      axios
+        .post("https://commerce-backend-rho.vercel.app/auth/register", data)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  )
   return (
     <Body>
       <div className="form_body">
@@ -38,7 +37,7 @@ function Login() {
         </div>
 
         <form action="" onSubmit={onSubmit}>
-     
+
           <div className="input_body">
             <label htmlFor="">Email</label>
             <input

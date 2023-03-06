@@ -2,9 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import ProductChild from "../components/Products/ProductChild";
 import Products from "../components/Products/Products";
 import { cartActions } from "../redux/product";
 
@@ -26,7 +25,7 @@ function ProductDatails() {
   useEffect(() => {
     const fetch = async () => {
       await axios
-        .get(`http://localhost:3001/api/v1/product/${id}`, {
+        .get(`https://commerce-backend-rho.vercel.app/api/v1/product/${id}`, {
           headers: {
             "Content-Type": "application/json, text/plain",
           },
@@ -40,7 +39,7 @@ function ProductDatails() {
 
   useEffect(() => {
     const peoplesLike = async () => {
-      await axios.get(`http://localhost:3001/api/v1/product`).then((res) => {
+      await axios.get(`https://commerce-backend-rho.vercel.app/api/v1/product`).then((res) => {
         setProduct(res.data);
       });
     };
@@ -49,6 +48,11 @@ function ProductDatails() {
 
   return (
     <Body>
+      <div className="link_header">
+        <Link to="/">Home / </Link>
+        <Link to="/products">Products / </Link>
+        <p>{data.title}</p>
+      </div>
       <Flex>
         <BoxImage>
           <img src={data.image} alt="" />

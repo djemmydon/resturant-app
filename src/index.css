@@ -4,40 +4,60 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iIzNlM2UzZCIvPjwvc3ZnPg=='),
+  auto;
+  scroll-behavior: smooth;
+
+}
+
+a:hover{
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iIzNlM2UzZCIvPjwvc3ZnPg=='),
+  auto;
+transition: 0.3s;
 
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-h1,h2 {
-  font-family: 'Montserrat', sans-serif;
+h1,
+h2 {
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
-
 }
 
-p{
-  font-family: 'Montserrat', sans-serif;
+p {
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
-font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
-
-button{
-  font-family: 'Montserrat', sans-serif;
+button {
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
-
 }
 
-.link_header{
-  border-bottom: 1px solid black;
+.link_header {
+  border-bottom: 1px solid grey;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 1rem;
+}
+
+.link_header a {
+  color: grey;
+}
+.link_header p {
+  color: #ed1d24;
 }

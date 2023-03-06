@@ -1,36 +1,34 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Register() {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-  const [image, setImage] = useState('')
-  const [password, setPassword] = useState("")
-
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleImage = (e) => {
-    setImage(e.target.files[0])
-    console.log(image)
-  }
+    setImage(e.target.files[0]);
+    console.log(image);
+  };
 
   console.log(image);
 
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // const data = { firstName, lastName, email, password}
 
-    const formData = new FormData()
-    formData.append("firstName", firstName)
-    formData.append("lastName", lastName)
-    formData.append("password", password)
-    formData.append("email", email)
-    formData.append("image", image)
+    const formData = new FormData();
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("password", password);
+    formData.append("email", email);
+    formData.append("image", image);
     axios
-      .post("http://localhost:3001/auth/register", formData)
+      .post("https://commerce-backend-rho.vercel.app/auth/register", formData)
       .then((res) => {
         console.log(res.data);
       })
@@ -51,7 +49,8 @@ function Register() {
             <input
               placeholder="e.g Adenike"
               type="text"
-              value={firstName} onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="input_body">
@@ -59,8 +58,8 @@ function Register() {
             <input
               placeholder="e.g Emeka"
               type="text"
-              value={lastName} onChange={(e) => setLastName(e.target.value)}
-
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
           <div className="input_body">
@@ -68,8 +67,8 @@ function Register() {
             <input
               placeholder="e.g johndoe@gmail.com"
               type="email"
-              value={email} onChange={(e) => setEmail(e.target.value)}
-
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="input_body">
@@ -78,8 +77,7 @@ function Register() {
               placeholder="e.g johndoe@gmail.com"
               type="file"
               name="image"
-            onChange={handleImage}
-
+              onChange={handleImage}
             />
           </div>
           <div className="input_body">
@@ -87,8 +85,8 @@ function Register() {
             <input
               placeholder="e.g MyPassword321"
               type="password"
-              value={password} onChange={(e) => setPassword(e.target.value)}
-
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="submit">
@@ -126,12 +124,11 @@ const Body = styled.div`
     width: 500px;
     margin: 0 auto;
     @media screen and (max-width: 600px) {
-        width: 330px;
+      width: 330px;
     }
   }
   form {
     width: 100%;
- 
 
     display: flex;
     flex-direction: column;
@@ -143,9 +140,8 @@ const Body = styled.div`
       display: flex;
       flex-direction: column;
       gap: 5px;
-      width:100%;
+      width: 100%;
 
-   
       input {
         border: 2px solid #f19b07a9;
         width: 100%;
@@ -214,7 +210,7 @@ const Body = styled.div`
       color: #ff7700;
       transition: 0.4s;
 
-      :hover{
+      :hover {
         text-decoration: underline;
       }
     }

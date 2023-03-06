@@ -7,7 +7,7 @@ function ProductPage() {
 
   const options = {
     method: 'GET',
-    url: 'http://localhost:3001/api/v1/product',
+    url: 'https://commerce-backend-rho.vercel.app/api/v1/product',
   
   };                                                                                                                                                                                                                                                                                                                                                                                         
   useEffect(() => {

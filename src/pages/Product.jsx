@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Products from "../components/Products/Products";
 
@@ -8,7 +9,7 @@ function Product() {
 
   const options = {
     method: "GET",
-    url: "http://localhost:3001/api/v1/product",
+    url: "https://commerce-backend-rho.vercel.app/api/v1/product",
   };
   useEffect(() => {
     const fetchApi = async () => {
@@ -21,6 +22,10 @@ function Product() {
   });
   return (
     <Body>
+      <div className="link_header">
+        <Link to="/">Home  /</Link>
+        <p>Products </p>
+      </div>
       <TemplateBody>
         <Template1>
           <Shop />
@@ -133,7 +138,7 @@ const Template2 = styled.div`
   height: 100%;
   margin: 10px;
   @media screen and (max-width: 900px) {
-   margin: 0px;
+    margin: 0px;
   }
 
   .header {
@@ -155,8 +160,8 @@ const Template2 = styled.div`
       height: 130px;
 
       @media screen and (max-width: 500px) {
-  display: none;
-  }
+        display: none;
+      }
     }
 
     p {

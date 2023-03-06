@@ -38,15 +38,14 @@ function CreateProduct() {
     setLoading(true);
 
     await axios
-      
-      .post("http://localhost:3001/api/v1/product", items, {
+
+      .post("hhttps://commerce-backend-rho.vercel.app/api/v1/product", items, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
         try {
-
           if (res.status) {
             setLoading(false);
           }

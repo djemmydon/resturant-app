@@ -76,6 +76,10 @@ const Body = styled.div`
       height: 400px;
       margin: 0 auto;
 
+      @media screen and (max-width: 600px) {
+      height: 300px;
+      }
+
       img {
         height: 100%;
       }

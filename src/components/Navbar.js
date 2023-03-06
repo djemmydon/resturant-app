@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import NavCart from "./NavCart";
 import styled from "styled-components";
-import { cartActions } from "../redux/product";
-
-
+import useTotal from "../redux/total";
 
 // className={`${link}`}
 
 function Navbar() {
   const [search, setSearch] = useState(false);
-  // const cart = useSelector((state) => state.cart);
-  const totalItems = useSelector((state) => state.cart.totalQty);
-  const dispatch = useDispatch()
 
   const [open, setOpen] = useState(true);
   const [nav, setNav] = useState(false);
+  const { totalQty } = useTotal();
 
   const handleOpen = () => {
     setOpen(!open);
@@ -26,42 +21,39 @@ function Navbar() {
     setNav(!nav);
   };
 
-
   // useEffect(() => {
   //   dispatch(cartActions.getCartTotal())
   // }, [dispatch])
-  
+
   return (
     <>
       <nav className=" relative h-full ">
-        
-          <>
-            <Search>
-              <div className={search ? `search active` : `search`}>
-                <div className="w-full ">
-                  <div className="float-right p-5 cursor-pointer">
-                    <span
-                      className="material-symbols-outlined text-3xl"
-                      onClick={() => setSearch(!search)}
-                    >
-                      close
-                    </span>
-                  </div>
-                  <input
-                    placeholder="search"
-                    className="w-full h-14 px-2 border-2"
-                  />
+        <>
+          <Search>
+            <div className={search ? `search active` : `search`}>
+              <div className="w-full ">
+                <div className="float-right p-5 cursor-pointer">
+                  <span
+                    className="material-symbols-outlined text-3xl"
+                    onClick={() => setSearch(!search)}
+                  >
+                    close
+                  </span>
                 </div>
+                <input
+                  placeholder="search"
+                  className="w-full h-14 px-2 border-2"
+                />
+              </div>
 
-                <div className="h-full bg-white">
-                  <div className="flex justify-center items-center h-full">
-                    <h2>No result found😒😒</h2>
-                  </div>
+              <div className="h-full bg-white">
+                <div className="flex justify-center items-center h-full">
+                  <h2>No result found😒😒</h2>
                 </div>
               </div>
-            </Search>
-          </>
-        
+            </div>
+          </Search>
+        </>
 
         <div className=" bg-[#ed1d24] text-white w-full h-28 flex items-center justify-between md:justify-around fixed z-20 ">
           <div className=" h-16 flex flex-col items-center">
@@ -113,7 +105,7 @@ function Navbar() {
                 className=" flex flex-col justify-center items-center cursor-pointer relative"
               >
                 <span className=" absolute w-4 h-4 rounded-full -right-1 -top-0 text-center text-xs bg-[#fff] text-[#ed1d24]    cursor-pointer">
-                  {totalItems}
+                  {totalQty}
                 </span>
                 <span className="material-symbols-outlined text-2xl">
                   shopping_cart
@@ -186,7 +178,6 @@ export default Navbar;
 const Search = styled.div`
   /* bg-white flex flex-col justify-center px-10 py-5 z-40 w-full h-screen absolute top-0 right-0  ; */
   transition: 1s;
-  
 
   .search {
     background-color: white;
@@ -203,11 +194,9 @@ const Search = styled.div`
     transition: 0.5s ease;
     opacity: 0;
     transform: translate(-0deg);
-
   }
 
-  .search.active{
-
+  .search.active {
     height: 100vh;
     top: 0;
     opacity: 1;
