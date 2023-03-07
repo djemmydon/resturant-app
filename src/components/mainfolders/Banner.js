@@ -34,6 +34,7 @@ const Body = styled.div`
   margin: 1rem 0;
   @media screen and (max-width: 600px) {
     margin: 0;
+    padding: 1rem 1rem;
   }
   .flex_body {
     display: flex;
@@ -78,6 +79,9 @@ const Body = styled.div`
 
       @media screen and (max-width: 600px) {
       height: 300px;
+      }
+      @media screen and (max-width: 400px) {
+      height: 200px;
       }
 
       img {

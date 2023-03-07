@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const fetchFromLocalStorage = () => {
   let cart = localStorage.getItem("cart");
@@ -17,6 +18,7 @@ const initialState = {
   itemList: fetchFromLocalStorage(),
   totalQty: 0,
   allTotalPrice: 0,
+  toggleLogin: false,
 };
 
 const cartSlice = createSlice({
@@ -46,9 +48,11 @@ const cartSlice = createSlice({
         state.itemList = tempCart;
         state.totalQty = state.itemList.length;
         storeInLocalStorage(state.itemList);
+        toast("Product added to cart successfully ✔️");
       } else {
         state.itemList.push(action.payload);
         storeInLocalStorage(state.itemList);
+        toast("Product added to cart successfully ✔️");
       }
     },
 
@@ -90,6 +94,12 @@ const cartSlice = createSlice({
 
       state.itemList = tempCart;
       storeInLocalStorage(state.itemList);
+    },
+    toggle: (state, action) => {
+      if (action.payload.type === "OPEN")
+        state.toggleLogin = !state.toggleLogin;
+
+      return state;
     },
   },
 });

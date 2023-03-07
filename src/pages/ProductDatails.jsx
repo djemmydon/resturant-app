@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -39,9 +41,11 @@ function ProductDatails() {
 
   useEffect(() => {
     const peoplesLike = async () => {
-      await axios.get(`https://commerce-backend-rho.vercel.app/api/v1/product`).then((res) => {
-        setProduct(res.data);
-      });
+      await axios
+        .get(`https://commerce-backend-rho.vercel.app/api/v1/product`)
+        .then((res) => {
+          setProduct(res.data);
+        });
     };
     peoplesLike();
   });
@@ -55,7 +59,11 @@ function ProductDatails() {
       </div>
       <Flex>
         <BoxImage>
-          <img src={data.image} alt="" />
+          <LazyLoadImage
+            src={data.image}
+            placeholderSrc={data.image}
+            effect="blur"
+          />
         </BoxImage>
         <BoxText>
           <div className="head">

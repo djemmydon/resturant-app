@@ -1,5 +1,4 @@
 import React from "react";
-import Bonus from "../components/bonus/Bonus";
 import Category from "../components/categories/Category";
 import Header from "../components/Header";
 import Banner from "../components/mainfolders/Banner";
@@ -14,7 +13,7 @@ function Home() {
       <div className="">
         <Category />
 
-        <Header name="Featured Product" link="/" />
+        <Header name="Featured Product" link="/products" />
         <ProductPage />
         <Banner />
       </div>

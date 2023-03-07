@@ -3,7 +3,6 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
 function Category() {
   const settings = {
     infinite: true,
@@ -17,15 +16,22 @@ function Category() {
       {
         breakpoint: 2000,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 4,
+          slidesToScroll: 4,
+        },
+      },
+      {
+        breakpoint:1000,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           initialSlide: 1,
         },
       },
@@ -56,21 +62,24 @@ const Body = styled.div`
   max-width: 100%;
   align-items: center;
 
+  @media screen and (max-width: 400px) {
+    margin: 6rem 1rem;
+ 
+  }
+
   .slick-next {
     right: 0;
-    
   }
   .slick-prev {
     left: 0;
   }
 
   .body_swipe {
-
   }
 
   .slick-slide {
-    width: 300px !important;
-    margin: 0 0rem;
+    display: flex!important;
+    justify-content: center!important;
   }
   .swipe {
     width: 350px !important;
@@ -78,6 +87,10 @@ const Body = styled.div`
     padding: 0 1rem;
     border-radius: 10px;
     margin: 0 0px;
+
+    @media screen and (max-width: 400px) {
+      width: 200px !important;
+    }
     img {
       margin: 0 auto;
     }
@@ -97,6 +110,9 @@ const Body = styled.div`
 
       @media screen and (max-width: 600px) {
         height: 120px;
+      }
+      @media screen and (max-width: 400px) {
+        height: 100px;
       }
     }
   }

@@ -141,10 +141,13 @@ const Footer1 = styled.div`
     flex-wrap: wrap;
     padding: 4rem 1rem;
     justify-content: flex-start;
+    
   }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
+    margin: 0;
+    padding: 1rem 1rem;
+    gap: 1rem;
   }
-
   .header {
     h2 {
       font-size: 1.2rem;
@@ -167,6 +170,10 @@ const Footer1 = styled.div`
         font-weight: 400;
         color: #ed1d24;
         line-height: 20px;
+        @media screen and (max-width: 600px) {
+        font-size: 1.5rem;
+
+        }
       }
     }
   }
@@ -186,6 +193,7 @@ const Footer1 = styled.div`
         position: relative;
         padding-bottom: 2px;
         transition: 0.4s ease-in-out;
+        font-size: 0.8rem;
 
         &::before {
           content: "";
@@ -224,10 +232,9 @@ const Footer2 = styled.div`
   .image {
     height: 20px;
 
-  @media screen and (max-width: 500px) {
-    height: 15px;
-
-  }
+    @media screen and (max-width: 500px) {
+      height: 15px;
+    }
 
     img {
       height: 100%;

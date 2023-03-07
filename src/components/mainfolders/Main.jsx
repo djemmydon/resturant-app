@@ -152,8 +152,9 @@ const Body = styled.div`
     }
   }
 
-  .swiper-button-next,.swiper-button-prev {
-    padding: 19px;
+  .swiper-button-next,
+  .swiper-button-prev {
+    padding: 10px;
     width: 50px;
     height: 50px;
     background-color: white;
@@ -162,13 +163,12 @@ const Body = styled.div`
     transition: 0.5s;
 
 
-    &:hover{
+    &:hover {
       border: 10px solid white;
     }
-
-
   }
-  .swiper-button-next:after,  .swiper-button-prev:after {
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
     color: #000000 !important;
     font-size: 25px;
 

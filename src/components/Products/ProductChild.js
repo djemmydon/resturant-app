@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import  { useState } from "react";
+import {  useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { cartActions } from "../../redux/product";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function ProductChild({ item }) {
   const [qty, setQty] = useState(1);
-  const carts = useSelector((state) => state.cart);
   const disptch = useDispatch();
 
-  const decrease = () => {
-    if (qty >= 0) {
-      setQty((prev) => prev - 1);
-    }
-  };
-  const increase = () => {
-    setQty((prev) => prev + 1);
-  };
+  // const decrease = () => {
+  //   if (qty >= 0) {
+  //     setQty((prev) => prev - 1);
+  //   }
+  // };
+  // const increase = () => {
+  //   setQty((prev) => prev + 1);
+  // };
 
   const totalPrice = qty * item.price;
 
@@ -30,7 +31,10 @@ function ProductChild({ item }) {
     <Body key={item.id}>
       <Link to={`/products/${item._id}`}>
         <div className="image">
-          <img className=" " src={item.image} alt="product" />
+          <LazyLoadImage height={"100%"} src={item.image}
+            placeholderSrc={item.image}
+          effect="blur"
+          />
         </div>
         <div className="flex_body">
           <div className="text">

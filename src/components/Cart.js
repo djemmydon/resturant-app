@@ -26,7 +26,7 @@ function Cart() {
           <div>
             {cart.length === 0 && (
               <div className="text-center flex items-center justify-center w-full h-[200px]">
-                <h1>Loading 😊😊</h1>
+                <h1>Your Cart Is Empty</h1>
               </div>
             )}
 
@@ -62,6 +62,7 @@ export default Cart;
 
 const Shop = ({ cart }) => {
   const { totalPrice, totalQty } = useTotal();
+  const navigate = useNavigate();
 
   const overall = totalPrice + 7;
 
@@ -82,12 +83,11 @@ const Shop = ({ cart }) => {
         </div>
         <div className="shop_item">
           <p>Total</p>
-          <span>{overall.toLocaleString()}</span>
+          <span>${overall.toLocaleString()}.00</span>
         </div>
-        <div className="shop_item">
-          <p>{cart.length} Item(s)</p>
-          <span>${totalPrice.toLocaleString()}</span>
-        </div>
+      </div>
+      <div className="button_back">
+        <button onClick={() => navigate("/checkout")}>{" Proceed To Checkout"}</button>
       </div>
     </ShopBody>
   );
@@ -102,7 +102,7 @@ const CartProduct = ({ item }) => {
       </div>
       <div className="text">
         <h2>{item.title}</h2>
-        <h3>{item.price}</h3>
+        <h3>${item.price.toLocaleString()}.00</h3>
       </div>
       <div className="control_form">
         <span
@@ -126,7 +126,7 @@ const CartProduct = ({ item }) => {
       </div>
 
       <div>
-        <p>{item.totalPrice}</p>
+        <p>${item.totalPrice.toLocaleString()}.00</p>
       </div>
 
       <div>
@@ -268,6 +268,33 @@ const ShopBody = styled.div`
       span {
         font-weight: 600;
         color: grey;
+      }
+    }
+  }
+
+  .button_back {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    button {
+      width: 200px;
+      height: 50px;
+      font-size: 0.7rem;
+      color: #fff;
+      background-color: #000;
+      border-color: #ed1d24;
+      text-transform: uppercase;
+      transition: 0.3s;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        font-size: 0.7rem;
+      }
+      :hover {
+        background-color: #ed1d24;
       }
     }
   }

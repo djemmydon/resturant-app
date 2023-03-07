@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { muusiApi  } from './redux/apiSlice';
+import { muusiApi } from './redux/apiSlice';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import {ApiProvider} from "@reduxjs/toolkit/query/react"
+import { ApiProvider } from "@reduxjs/toolkit/query/react"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -15,14 +17,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-   
+
     <ApiProvider api={muusiApi}>
       <Provider store={store}>
-        
+        <ToastContainer />
         <App />
       </Provider>
-      </ApiProvider>
-      
+    </ApiProvider>
+
   </React.StrictMode>
 );
 

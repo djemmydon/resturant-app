@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import NavCart from "./NavCart";
 import styled from "styled-components";
 import useTotal from "../redux/total";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../redux/product";
 
 // className={`${link}`}
 
@@ -13,6 +15,7 @@ function Navbar() {
   const [open, setOpen] = useState(true);
   const [nav, setNav] = useState(false);
   const { totalQty } = useTotal();
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen(!open);
@@ -55,9 +58,14 @@ function Navbar() {
           </Search>
         </>
 
-        <div className=" bg-[#ed1d24] text-white w-full h-28 flex items-center justify-between md:justify-around fixed z-20 ">
+        <div className=" bg-[#ed1d24] shadow-lg text-white w-full h-28 flex items-center justify-between px-2 md:justify-around fixed z-20 ">
           <div className=" h-16 flex flex-col items-center">
-            <img className="h-full" src={Logo} alt="" />
+            <img
+              className=" h-14
+             md:h-full"
+              src={Logo}
+              alt=""
+            />
             {/* <span className="text-orangee text-2xl font-bold">YuMmY</span> */}
           </div>
 
@@ -67,7 +75,7 @@ function Navbar() {
                 <Link to="/">Home</Link>
               </li>
               <li className=" group text-md  text-[#fff] transition ease-in-out hover:text-orangee">
-                <Link to="/">
+                <Link to="/products">
                   Shop
                   <ul className="absolute hidden group-hover:block transition-all w-[200px] shadow bg-white">
                     <li className="text-[#ed1d24] hover:text-orangee hover:ease-in-out hover:duration-300 text-sm p-2 hover:bg-white text-orange">
@@ -83,23 +91,23 @@ function Navbar() {
                 </Link>
               </li>
               <li className=" text-md  text-[#fff] transition ease-in-out hover:text-orangee">
-                <Link to="/">Contact</Link>
+                <Link to="/#">Contact</Link>
               </li>
               <li className=" text-md  text-[#fff] transition ease-in-out hover:text-orangee">
-                <Link to="/">About</Link>
+                <Link to="/#">About</Link>
               </li>
             </ul>
           </div>
 
           <div className=" flex">
-            <div className=" flex-col justify-between hidden  md:flex ">
+            {/* <div className=" flex-col justify-between hidden  md:flex ">
               <span className="">Call for Order</span>
               <p className=" text-xl text-orangee font-bold">{`+2348 542 3449 570`}</p>
-            </div>
+            </div> */}
 
-            <div className=" bg-orangee w-[1px] mx-4 hidden  md:flex"></div>
+            <div className=" bg-grey w-[1px] mx-4 hidden  md:flex"></div>
 
-            <div className=" flex items-center gap-3">
+            <div className=" flex items-center gap-2 md:gap-5">
               <div
                 onClick={handleOpen}
                 className=" flex flex-col justify-center items-center cursor-pointer relative"
@@ -113,20 +121,29 @@ function Navbar() {
               </div>
 
               <div
-                onClick={handleOpenNav}
-                className="cursor-pointer block md:hidden"
-              >
-                <span className="material-symbols-outlined  text-2xl">
-                  menu
-                </span>
-              </div>
-
-              <div
                 className="cursor-pointer"
                 onClick={() => setSearch(!search)}
               >
                 <span className="material-symbols-outlined  text-2xl">
                   search
+                </span>
+              </div>
+
+              <div
+                className="cursor-pointer"
+                onClick={() => dispatch(cartActions.toggle({type: "OPEN"}))}
+              >
+                <span className="material-symbols-outlined  text-2xl">
+                  person
+                </span>
+              </div>
+
+              <div
+                onClick={handleOpenNav}
+                className="cursor-pointer block md:hidden"
+              >
+                <span className="material-symbols-outlined  text-2xl">
+                  menu
                 </span>
               </div>
             </div>

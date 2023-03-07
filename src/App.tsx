@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
@@ -13,18 +12,20 @@ import CreateProduct from './pages/Admin/CreateProduct';
 import ProductDatails from './pages/ProductDatails';
 import Product from './pages/Product';
 import Footer from './components/Footer';
+import Authentication from './components/Authentication';
+
+
 
 
 function App() {
-
 
 
   return (
     <div className="App relative">
       <BrowserRouter>
 
-        <Navbar />
-
+        <Navbar  />
+        <Authentication />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<ProductPage />} />
