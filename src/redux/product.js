@@ -20,7 +20,7 @@ const initialState = {
   allTotalPrice: 0,
   toggleLogin: false,
 };
-
+ 
 const cartSlice = createSlice({
   name: "cart",
   initialState,

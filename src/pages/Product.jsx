@@ -23,7 +23,7 @@ function Product() {
   return (
     <Body>
       <div className="link_header">
-        <Link to="/">Home  /</Link>
+        <Link to="/">Home /</Link>
         <p>Products </p>
       </div>
       <TemplateBody>
@@ -81,20 +81,6 @@ const Shop = () => {
         <div className="shop_item">
           Computer & Laptop
           <span class="material-symbols-outlined">chevron_right</span>
-          {/* <div className="child">
-                      <div>
-                          <p>Hp Laptop</p>
-                      </div>
-                      <div>
-                          <p>Lenovo Laptop</p>
-                      </div>
-                      <div>
-                          <p>Dell Monitors</p>
-                      </div>
-                      <div>
-                          <p>Mac Computer</p>
-                      </div>
-              </div> */}
         </div>
         <div className="shop_item">
           Cameta & Photo
@@ -116,7 +102,7 @@ const Shop = () => {
 const Body = styled.div`
   height: 100%;
   width: 100%;
-  padding-top: 10rem;
+  padding-top: 3rem;
 `;
 const TemplateBody = styled.div`
   display: flex;
@@ -131,7 +117,7 @@ const TemplateBody = styled.div`
 const Template1 = styled.div`
   width: 380px;
   height: 100%;
-  margin: 10px;
+  padding: 1rem;
 `;
 const Template2 = styled.div`
   width: 100%;
@@ -139,10 +125,11 @@ const Template2 = styled.div`
   margin: 10px;
   @media screen and (max-width: 900px) {
     margin: 0px;
+    padding: 0 1rem;
   }
 
   .header {
-    border: 1px solid gray;
+    border: 1px solid rgba(192,201,210,.5);
     h2 {
       margin-left: 10px;
       padding: 0.5rem;
@@ -166,16 +153,16 @@ const Template2 = styled.div`
 
     p {
       font-weight: 600;
-      color: gray;
+      color: rgba(192,201,210,.5);
     }
   }
 `;
 
 const ShopBody = styled.div`
-  border: 1px solid gray;
+  border: 1px solid rgba(192,201,210,.5);
 
   .header {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgba(192,201,210,.5);
     padding: 5px 10px;
   }
 

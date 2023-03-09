@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import NavCart from "./NavCart";
 import styled from "styled-components";
@@ -24,12 +23,8 @@ function Navbar() {
     setNav(!nav);
   };
 
-  // useEffect(() => {
-  //   dispatch(cartActions.getCartTotal())
-  // }, [dispatch])
-
   return (
-    <>
+    <Body>
       <nav className=" relative h-full ">
         <>
           <Search>
@@ -58,53 +53,33 @@ function Navbar() {
           </Search>
         </>
 
-        <div className=" bg-[#ed1d24] shadow-lg text-white w-full h-28 flex items-center justify-between px-2 md:justify-around fixed z-20 ">
-          <div className=" h-16 flex flex-col items-center">
-            <img
-              className=" h-14
-             md:h-full"
-              src={Logo}
-              alt=""
-            />
-            {/* <span className="text-orangee text-2xl font-bold">YuMmY</span> */}
-          </div>
-
-          <div className="hidden md:block">
-            <ul className=" flex gap-8 justify-center tems-center">
-              <li className=" text-md  text-[#fff] transition ease-in-out hover:text-orangee">
+        <NavbarFlexBody className="shadow-xl">
+          <div className="nav_content">
+            <ul className="">
+              <li className=" ">
                 <Link to="/">Home</Link>
               </li>
-              <li className=" group text-md  text-[#fff] transition ease-in-out hover:text-orangee">
-                <Link to="/products">
-                  Shop
-                  <ul className="absolute hidden group-hover:block transition-all w-[200px] shadow bg-white">
-                    <li className="text-[#ed1d24] hover:text-orangee hover:ease-in-out hover:duration-300 text-sm p-2 hover:bg-white text-orange">
-                      <Link>Sharwama</Link>
-                    </li>
-                    <li className="text-[#ed1d24] hover:text-orangee text-sm p-2 hover:bg-white text-orange hover:ease-in-out hover:duration-300">
-                      <Link>Pizza</Link>
-                    </li>
-                    <li className="text-[#ed1d24] hover:text-orangee text-sm p-2 hover:bg-white text- hover:ease-in-out hover:duration-300">
-                      <Link>Burga</Link>
-                    </li>
-                  </ul>
-                </Link>
+              <li className=" group ">
+                <Link to="/products">Shop</Link>
               </li>
-              <li className=" text-md  text-[#fff] transition ease-in-out hover:text-orangee">
+              <li className=" ">
                 <Link to="/#">Contact</Link>
               </li>
-              <li className=" text-md  text-[#fff] transition ease-in-out hover:text-orangee">
+              <li className=" ">
                 <Link to="/#">About</Link>
               </li>
             </ul>
           </div>
-
+          <div className="logo">
+            <h1>
+              {" "}
+              <span className="material-symbols-outlined text-2xl">
+                shopping_cart
+              </span>
+              MARKET4ALL
+            </h1>
+          </div>
           <div className=" flex">
-            {/* <div className=" flex-col justify-between hidden  md:flex ">
-              <span className="">Call for Order</span>
-              <p className=" text-xl text-orangee font-bold">{`+2348 542 3449 570`}</p>
-            </div> */}
-
             <div className=" bg-grey w-[1px] mx-4 hidden  md:flex"></div>
 
             <div className=" flex items-center gap-2 md:gap-5">
@@ -131,7 +106,7 @@ function Navbar() {
 
               <div
                 className="cursor-pointer"
-                onClick={() => dispatch(cartActions.toggle({type: "OPEN"}))}
+                onClick={() => dispatch(cartActions.toggle({ type: "OPEN" }))}
               >
                 <span className="material-symbols-outlined  text-2xl">
                   person
@@ -149,48 +124,130 @@ function Navbar() {
             </div>
           </div>
           <NavCart handleOpen={handleOpen} open={open} />
-        </div>
+        </NavbarFlexBody>
+
+        {/* Mobile Navbar Item */}
         <div
           className={
-            nav
-              ? "  fixed block md:hidden top-28 z-10  bg-white w-full ease-in-out duration-300 py-20"
-              : "absolute block md:hidden -top-96  z-10  bg-white w-full ease-in-out duration-300 py-20"
+            nav ? "mobile_nav active shadow-xl" : "mobile_nav shadow-xl"
           }
         >
-          <ul className=" flex gap-8 justify-center flex-col items-center">
-            <li className=" text-2xl font-bold text-grey transition ease-in-out hover:text-orangee">
-              <Link to="/">Home</Link>
+          <ul className=" ">
+            <li className=" " onClick={handleOpenNav}>
+              <Link to="/">Women</Link>
             </li>
-            <li className=" group text-2xl font-bold text-grey transition ease-in-out hover:text-orangee">
-              <Link to="/">
-                Shop
-                {/* <ul className="absolute hidden group-hover:block transition-all w-[200px] bg-orangee">
-                <li className="text-white hover:text-orangee hover:ease-in-out hover:duration-300 text-xl p-2 hover:bg-white text-orange">
-                  <Link>Sharwama</Link>
-                </li>
-                <li className="text-white hover:text-orangee text-xl p-2 hover:bg-white text-orange hover:ease-in-out hover:duration-300">
-                  <Link>Pizza</Link>
-                </li>
-                <li className="text-white hover:text-orangee text-xl p-2 hover:bg-white text- hover:ease-in-out hover:duration-300">
-                  <Link>Burga</Link>
-                </li>
-              </ul> */}
-              </Link>
+            <li className=" group " onClick={handleOpenNav}>
+              <Link to="/">Men</Link>
             </li>
-            <li className=" text-2xl font-bold text-grey transition ease-in-out hover:text-orangee">
+            <li className=" " onClick={handleOpenNav}>
+              <Link to="/">Shop</Link>
+            </li>
+            <li className=" " onClick={handleOpenNav}>
+              <Link to="/">About Us</Link>
+            </li>
+            <li className=" " onClick={handleOpenNav}>
               <Link to="/">Contact</Link>
             </li>
-            <li className=" text-2xl font-bold text-grey transition ease-in-out hover:text-orangee">
-              <Link to="/">About</Link>
+            <li className=" " onClick={handleOpenNav}>
+              <Link to="/">Gallery</Link>
             </li>
           </ul>
         </div>
       </nav>
-    </>
+    </Body>
   );
 }
 
 export default Navbar;
+
+const Body = styled.div`
+  .mobile_nav {
+    width: 300px;
+    background-color: red;
+    position: fixed;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    margin-top: 3rem;
+    padding: 1rem 0;
+    /* transform: scaleX(0); */
+    transition: 0.5s ease-in-out;
+    left: -100%;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem;
+
+      li {
+        font-size: 1rem;
+        border-bottom: 0.3px solid grey;
+      }
+    }
+  }
+
+  .mobile_nav.active {
+    left: 0;
+  }
+`;
+
+const NavbarFlexBody = styled.div`
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  height: 60px;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 200;
+  top: 0;
+  padding: 0 1rem;
+
+  .nav_content {
+    height: 100%;
+    padding: 0 1rem;
+    ul {
+      height: 100%;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+
+      li {
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      display: none;
+    }
+  }
+
+  .logo {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    h1 {
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      span {
+        font-size: 2rem;
+        color: red;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      h1 {
+        font-size: 1rem;
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+`;
 
 const Search = styled.div`
   /* bg-white flex flex-col justify-center px-10 py-5 z-40 w-full h-screen absolute top-0 right-0  ; */

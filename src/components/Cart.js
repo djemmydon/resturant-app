@@ -180,7 +180,7 @@ const Template2 = styled.div`
   }
 
   .header {
-    border: 1px solid gray;
+    border: 1px solid rgba(192,201,210,.5);
     h2 {
       margin-left: 10px;
       padding: 0.5rem;
@@ -230,7 +230,7 @@ const Template2 = styled.div`
 
     p {
       font-weight: 600;
-      color: gray;
+      color: rgba(192,201,210,.5);
     }
   }
 
@@ -239,17 +239,17 @@ const Template2 = styled.div`
     flex-direction: column;
     gap: 1rem;
     padding: 25px 0;
-    border-bottom: 0.5px solid #000;
-    border-left: 0.5px solid #000;
-    border-right: 0.5px solid #000;
+    border-bottom: 0.5px solid rgba(192,201,210,.5);
+    border-left: 0.5px solid rgba(192,201,210,.5);
+    border-right: 0.5px solid rgba(192,201,210,.5);
   }
 `;
 
 const ShopBody = styled.div`
-  border: 1px solid gray;
+  border: 1px solid rgba(192,201,210,.5);
 
   .header {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgba(192,201,210,.5);
     padding: 5px 10px;
   }
 
@@ -347,7 +347,7 @@ const CartBody = styled.div`
     gap: 1rem;
 
     span {
-      border: 1px solid gray;
+      border: 1px solid rgba(192,201,210,.5);
       cursor: pointer;
     }
 

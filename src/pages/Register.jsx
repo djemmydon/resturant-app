@@ -109,7 +109,7 @@ function Register() {
 export default Register;
 
 const Body = styled.div`
-  padding: 10rem 0;
+  padding: 5rem 0;
   width: 100%;
 
   h2 {

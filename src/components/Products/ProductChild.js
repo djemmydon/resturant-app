@@ -1,10 +1,10 @@
-import  { useState } from "react";
-import {  useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { cartActions } from "../../redux/product";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 function ProductChild({ item }) {
   const [qty, setQty] = useState(1);
@@ -31,19 +31,19 @@ function ProductChild({ item }) {
     <Body key={item.id}>
       <Link to={`/products/${item._id}`}>
         <div className="image">
-          <LazyLoadImage height={"100%"} src={item.image}
+          <LazyLoadImage
+            height={"100%"}
+            src={item.image}
             placeholderSrc={item.image}
-          effect="blur"
+            effect="blur"
           />
         </div>
         <div className="flex_body">
           <div className="text">
             <h1 className="">{item.title}</h1>
 
-            <p className="">
-              {" "}
-              <span> ${item.price}.00</span> ${item.price}.00
-            </p>
+            <p className=""> ${item.price}.00</p>
+            <span> ${item.price}.00</span>
           </div>
 
           {/* <div className="flex text-center gap-2 ">
@@ -79,7 +79,7 @@ export default ProductChild;
 
 const Body = styled.div`
   border: 0.6px solid rgba(27, 27, 27, 0.1);
-
+  /* transition: 0.3s ease-in-out; */
   width: 100%;
   .image {
     transition: 0.2s;
@@ -88,6 +88,11 @@ const Body = styled.div`
     width: 100%;
     height: 300px;
     background-color: #f3f2f2;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
     @media screen and (max-width: 500px) {
       height: 200px;
@@ -96,6 +101,11 @@ const Body = styled.div`
       height: 100%;
       width: 100%;
       object-fit: cover;
+      margin: 0 auto;
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.3s ease-in-out;
+      }
     }
   }
   .flex_body {
@@ -105,21 +115,24 @@ const Body = styled.div`
     color: white;
 
     .text {
-      margin: 0 1rem;
+      margin: 5px 1rem;
       color: #010101;
 
       h1 {
-        font-size: 0%.9rem;
+        font-size: 0.9rem;
       }
       p {
-        font-size: 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+
         color: #ed1d24;
-        span {
-          padding-right: 0.4rem;
-          text-decoration: line-through;
-          font-size: 0.7rem;
-          color: #a1d1d1;
-        }
+      }
+
+      span {
+        padding-right: 0.4rem;
+        text-decoration: line-through;
+        font-size: 0.7rem;
+        color: #a1d1d1;
       }
     }
   }

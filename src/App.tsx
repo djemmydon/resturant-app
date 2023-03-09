@@ -13,6 +13,7 @@ import ProductDatails from './pages/ProductDatails';
 import Product from './pages/Product';
 import Footer from './components/Footer';
 import Authentication from './components/Authentication';
+import Checkout from './pages/Checkout';
 
 
 
@@ -31,9 +32,16 @@ function App() {
           <Route path='/products' element={<ProductPage />} />
           <Route path='/admin/addproduct' element={<Admin />} />
           <Route path='/cart' element={<CartPage />} />
+          <Route path='/checkout' element={<Checkout />} />
+
+
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+
+
           <Route path='/create-product' element={<CreateProduct />} />
+
+
           <Route path='/products/' element={<Product />} />
           <Route path='/products/:id' element={<ProductDatails />} />
         </Routes>

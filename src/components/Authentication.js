@@ -8,15 +8,14 @@ function Authentication() {
 
   console.log(toggleLogin);
   return (
-      <BodyAuth className={toggleLogin ? "openAuth activeAuth" : "openAuth"}>
-        <div className={toggleLogin ? "open active" : "open"}>
-          <div className="shadow-md auth_body">
-            <Login setOpenReg={setOpenReg} openReg={openReg} />
-            <Register openReg={openReg} setOpenReg={setOpenReg} />
-          </div>
-        </div>{" "}
-      </BodyAuth>
-   
+    <BodyAuth className={toggleLogin ? "openAuth activeAuth" : "openAuth"}>
+      <div className={toggleLogin ? "open active" : "open"}>
+        <div className="shadow-md auth_body">
+          <Login setOpenReg={setOpenReg} openReg={openReg} />
+          <Register openReg={openReg} setOpenReg={setOpenReg} />
+        </div>
+      </div>{" "}
+    </BodyAuth>
   );
 }
 
@@ -73,7 +72,7 @@ const Register = ({ setOpenReg, openReg }) => {
           </div>
 
           <div className="button_back">
-            <button>{" Login"}</button>
+            <button>{" Register "}</button>
           </div>
         </form>
 
@@ -90,14 +89,13 @@ const BodyAuth = styled.div`
   position: fixed;
   z-index: 10;
   width: 100%;
-margin: 0 auto;
+  margin: 0 auto;
   overflow: hidden;
   background-color: #4f4f4f89;
 
   height: 100%;
   .open {
     transition: 0.4s;
-
     transform: translateY(-200%);
   }
 
@@ -109,7 +107,7 @@ margin: 0 auto;
     padding: 0 15px;
     position: relative;
     overflow: hidden;
-    border: 0.1px solid grey;
+    border: 0.1px solid rgba(192,201,210,.5);
     transition: 0.4s;
 
     height: 500px;
@@ -130,7 +128,7 @@ margin: 0 auto;
 
       .form_item {
         input {
-          border: 1px solid grey;
+          border: 1px solid rgba(192,201,210,.5);
           padding: 5px;
           width: 100%;
         }
@@ -153,7 +151,10 @@ margin: 0 auto;
           justify-content: center;
 
           span {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            
           }
           :hover {
             background-color: #ed1d24;
@@ -166,6 +167,7 @@ margin: 0 auto;
       margin-top: 1rem;
       p {
         color: grey;
+        cursor: pointer;
 
         :hover {
           color: #ed1d24;

@@ -105,7 +105,7 @@ function ProductDatails() {
 export default ProductDatails;
 
 const Body = styled.div`
-  padding-top: 10rem;
+  padding-top: 3rem;
   max-width: 100%;
   height: 100%;
 `;
