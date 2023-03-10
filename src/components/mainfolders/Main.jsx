@@ -260,10 +260,14 @@ const Body = styled.div`
           width: 100%;
         }
         @media screen and (max-width: 400px) {
-          height: 300px;
+          height: 500px;
+          width:100%;
         }
         img {
           height: 100%;
+          width:100%;
+          object-fit:cover;
+
         }
       }
     }

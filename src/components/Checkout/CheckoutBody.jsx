@@ -9,6 +9,7 @@ function CheckoutBody() {
   const cart = useSelector((state) => state.cart.itemList);
   const [selectState, setSelectState] = useState("");
 
+  console.log(selectState);
   return (
     <Body>
       <div className="link_header">
@@ -17,45 +18,50 @@ function CheckoutBody() {
       </div>
       <TemplateBody>
         <Template2>
-          <div className="header">
-            <div className="header_item">
-              <p>Personal Information</p>
-            </div>
-            <div className="header_item">
-              <p>Addresses</p>
-            </div>
-            <div className="header_item">
-              <p>Shipping Method</p>
-            </div>
-            <div className="header_item">
-              <p>Payment</p>
-            </div>
-          </div>
-
           <div>
             <div className="form">
               <form action="">
                 <div className="info">
-                  <p>Payment Method</p>
+                  <p>Billing Information</p>
                 </div>
                 <div className="form_item">
                   <label htmlFor="First Name">First Name</label>
-                  <input type="text" name="" id="" />
+                  <input
+                    placeholder="Enter Your First Name"
+                    type="text"
+                    name=""
+                    id=""
+                  />
                 </div>
 
                 <div className="form_item">
                   <label htmlFor="Last Name">Last Name</label>
-                  <input type="text" name="" id="" />
+                  <input
+                    placeholder="Enter Your Last Name"
+                    type="text"
+                    name=""
+                    id=""
+                  />
                 </div>
 
                 <div className="form_item">
                   <label htmlFor="Address">Address</label>
-                  <input type="text" name="" id="" />
+                  <input
+                    placeholder="Enter Your Address"
+                    type="text"
+                    name=""
+                    id=""
+                  />
                 </div>
 
                 <div className="form_item">
                   <label htmlFor="Address 2">Address 2</label>
-                  <input type="text" name="" id="" />
+                  <input
+                    placeholder="Enter Your Address 2"
+                    type="text"
+                    name=""
+                    id=""
+                  />
                 </div>
 
                 <div className="form_item">
@@ -66,9 +72,11 @@ function CheckoutBody() {
                     value={selectState}
                     onChange={(e) => setSelectState(e.target.value)}
                   >
-                    <option value="">Select Your State</option>
+                    <option>Select Your State</option>
                     {nigeria.map((item) => (
-                      <option value={selectState}>{item.states.name}</option>
+                      <option value={item.states.name}>
+                        {item.states.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -76,9 +84,12 @@ function CheckoutBody() {
                 <div className="form_item">
                   <label htmlFor="City">Local Goverment</label>
                   <select name="" id="">
-                    {nigeria.map((item) => (
-                      <option value={selectState}>{item.states.name}</option>
-                    ))}
+                    <option value="">Select Your Local Government</option>
+                    {nigeria
+                      .filter((x) => x.states.name === selectState)
+                      .map((item) =>
+                        item.states.locals.map((X) => <option>{X.name}</option>)
+                      )}
                   </select>
                 </div>
 
@@ -89,13 +100,15 @@ function CheckoutBody() {
                     <option value="">Paystack</option>
                   </select>
                 </div>
-                <div className="form_item">
-                  <label htmlFor="Country">Country</label>
-                  <input type="text" name="" id="" />
-                </div>
+
                 <div className="form_item">
                   <label htmlFor="Phone">Phone</label>
-                  <input type="text" name="" id="" />
+                  <input
+                    placeholder="Enter Your Phone Number"
+                    type="text"
+                    name=""
+                    id=""
+                  />
                 </div>
 
                 <div className="info">
@@ -160,7 +173,7 @@ const Shop = ({ cart }) => {
 const Body = styled.div`
   height: 100%;
   width: 100%;
-  padding-top: 7rem;
+  padding-top: 4rem;
 `;
 const TemplateBody = styled.div`
   display: flex;
@@ -201,16 +214,12 @@ const Template2 = styled.div`
   @media screen and (max-width: 400px) {
   }
 
-  .header {
-    display: inline-flex;
-    flex-direction: column;
-
-    .header_item {
-      padding: 5px;
-      background-color: rgba(192, 201, 210, 0.5);
+  .info {
+    p {
+      font-size: 1.4rem;
+      font-weight: 600;
     }
   }
-
   .form {
     display: flex;
     width: 100%;
@@ -243,6 +252,7 @@ const Template2 = styled.div`
         label {
           width: 200px;
           font-family: "Montserrat", sans-serif;
+          font-size: 0.8rem;
         }
         input,
         select {
@@ -252,6 +262,7 @@ const Template2 = styled.div`
           font-family: "Montserrat", sans-serif;
           outline: none;
           padding: 1px 5px;
+          font-size: 0.8rem;
 
           @media screen and (max-width: 800px) {
             flex-direction: column;
