@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGetAllMusicQuery } from '../../redux/apiSlice'
 function Discover() {
-  const  {data, isLoading} = useGetAllMusicQuery()
+  const  {data} = useGetAllMusicQuery()
 
   const music = data
 

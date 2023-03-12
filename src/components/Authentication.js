@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 function Authentication() {
   const [openReg, setOpenReg] = useState(false);
@@ -22,6 +24,39 @@ function Authentication() {
 export default Authentication;
 
 const Login = ({ setOpenReg, openReg }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setEorr] = useState(false);
+  const [loading, setLoading] = useState(false);
+  // let regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    // if (email >= 0 || password.length >= 5) {
+    //   setEorr(true);
+    // }
+
+    setLoading(true);
+    const data = {
+      email,
+      password,
+    };
+
+    axios
+      .post("https://commerce-backend-rho.vercel.app/api/v1/auth/login", data, {
+        headers: {
+          "Content-Type": "application/json, text/plain",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setLoading(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className={!openReg ? "login active_log" : "login"}>
       <div>
@@ -29,16 +64,35 @@ const Login = ({ setOpenReg, openReg }) => {
       </div>
 
       <div className="form_body">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="form_item">
-            <input placeholder="Enter Your Email" type="email" />
+            <input
+              placeholder="Enter Your Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <span>
+              {error && email.length >= 0 ? "Input must be an Email" : ""}
+            </span>
           </div>
           <div className="form_item">
-            <input placeholder="Enter Your Password" type="password" />
+            <input
+              placeholder="Enter Your Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span>
+              {error && password.length >= 5 ? "Password is required" : ""}
+            </span>
           </div>
 
           <div className="button_back">
-            <button>{" Login"}</button>
+            <button type="submit" disabled={loading}>
+              {loading ? <ScaleLoader color="white" /> : " Login "}
+            </button>
           </div>
         </form>
 
@@ -50,6 +104,50 @@ const Login = ({ setOpenReg, openReg }) => {
   );
 };
 const Register = ({ setOpenReg, openReg }) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setEorr] = useState(false);
+  const [loading, setLoading] = useState(false);
+  // let regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      fullName.length <= 0 ||
+      email === 0 ||
+      phone.length === 0 ||
+      password.length === 0 ||
+      password.length >= 5
+    ) {
+      setEorr(true);
+    }
+
+    setLoading(true);
+    const data = {
+      fullName,
+      email,
+      phone,
+      password,
+    };
+
+    axios
+      .post("https://commerce-backend-rho.vercel.app/api/v1/auth/login", data, {
+        headers: {
+          "Content-Type": "application/json, text/plain",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setLoading(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className={openReg ? "register active" : "register"}>
       <div>
@@ -57,22 +155,60 @@ const Register = ({ setOpenReg, openReg }) => {
       </div>
 
       <div className="form_body">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="form_item">
-            <input placeholder="Enter Full Fame" type="text" />
+            <input
+              placeholder="Enter Full Name"
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
+
+            <span>
+              {error && fullName.length <= 0
+                ? "Text field cannot be empty"
+                : ""}
+            </span>
           </div>
           <div className="form_item">
-            <input placeholder="Enter Your Email" type="email" />
+            <input
+              placeholder="Enter Your Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <span>
+              {error && email.length <= 0 ? "Input must be an Email" : ""}
+            </span>
           </div>
           <div className="form_item">
-            <input placeholder="Enter Your Phone Number" type="text" />
+            <input
+              placeholder="Enter Your Phone Number"
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <span>
+              {error && phone.length <= 0 ? "Phone Number is required" : ""}
+            </span>
           </div>
           <div className="form_item">
-            <input placeholder="Enter Password" type="password" />
+            <input
+              placeholder="Enter Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <span>
+              {error && password.length <= 0 ? "Password is required" : ""}
+            </span>
           </div>
 
           <div className="button_back">
-            <button>{" Register "}</button>
+            <button type="submit" disabled={loading}>
+              {loading ? <ScaleLoader /> : " Register "}
+            </button>
           </div>
         </form>
 
@@ -95,7 +231,7 @@ const BodyAuth = styled.div`
 
   height: 100%;
   .open {
-    transition: 0.4s;
+    /* transition: 0.4s; */
     transform: translateY(-200%);
   }
 
@@ -107,12 +243,12 @@ const BodyAuth = styled.div`
     padding: 0 15px;
     position: relative;
     overflow: hidden;
-    border: 0.1px solid rgba(192,201,210,.5);
+    border: 0.1px solid rgba(192, 201, 210, 0.5);
     transition: 0.4s;
 
     height: 500px;
     background-color: #fff;
-    width: 500px;
+    width: 400px;
     margin: 0 auto;
 
     @media screen and (max-width: 400px) {
@@ -128,9 +264,10 @@ const BodyAuth = styled.div`
 
       .form_item {
         input {
-          border: 1px solid rgba(192,201,210,.5);
+          border: 1px solid rgba(192, 201, 210, 0.5);
           padding: 5px;
           width: 100%;
+          outline: none;
         }
       }
       .button_back {
@@ -154,7 +291,6 @@ const BodyAuth = styled.div`
             font-size: 0.6rem;
             font-weight: 600;
             cursor: pointer;
-            
           }
           :hover {
             background-color: #ed1d24;

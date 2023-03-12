@@ -62,10 +62,9 @@ button {
   position: fixed;
   z-index: 10;
   width: 100%;
-
   overflow: hidden;
   background-color: #4f4f4f89;
-  transition: 0.5s;
+  transition: 0.2s;
   transform: translateY(-300%);
 
   height: 100%;

@@ -107,6 +107,10 @@ const Body = styled.div`
     img {
       height: 150px;
       object-fit: cover;
+      transition: all .3s;
+      :hover{
+        transform: scale(1.1);
+      }
 
       @media screen and (max-width: 600px) {
         height: 120px;

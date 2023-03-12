@@ -58,14 +58,14 @@ function CreateProduct() {
     <Body>
       <div className="form_body" encType="multipart/form-data">
         <div className="header">
-          <h2>Register</h2>
+          <h2>Create A Product</h2>
         </div>
 
         <form action="" onSubmit={onSubmit}>
           <div className="input_body">
-            <label htmlFor="">title</label>
+            <label htmlFor="">Product Name</label>
             <input
-              placeholder="e.g Adenike"
+              placeholder="e.g T-shirt"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -74,7 +74,7 @@ function CreateProduct() {
           <div className="input_body">
             <label htmlFor="">Description</label>
             <input
-              placeholder="e.g Emeka"
+              placeholder="product description..."
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -82,7 +82,7 @@ function CreateProduct() {
           </div>
 
           <div className="input_body">
-            <label htmlFor="">price</label>
+            <label htmlFor="">Price</label>
             <input
               placeholder="e.g Emeka"
               type="number"
@@ -91,15 +91,15 @@ function CreateProduct() {
             />
           </div>
           <div className="input_body">
-            <label htmlFor="">color</label>
+            <label htmlFor="">Color</label>
             <input
-              placeholder="e.g johndoe@gmail.com"
               value={color}
               onChange={(e) => setColor(e.target.value)}
+              type="color"
             />
           </div>
           <div className="input_body">
-            <label htmlFor="">Photo</label>
+            <label htmlFor="">Product Image</label>
             <input
               placeholder="e.g johndoe@gmail.com"
               type="file"
@@ -157,32 +157,35 @@ const Body = styled.div`
       gap: 5px;
       width: 100%;
 
+      label {
+        font-family: "Montserrat", sans-serif;
+      }
+
       input {
-        border: 2px solid #f19b07a9;
+        border: 1px solid rgba(192, 201, 210, 0.5);
+        font-family: "Montserrat", sans-serif;
+
         width: 100%;
         height: 40px;
-        border-radius: 10px;
         transition: 0.4s;
-        padding: 0 9px;
+        padding: 5px 9px;
         outline: none;
 
         :focus {
-          border: 2px solid #ffbd4ba9;
+          border: 1px solid #ed1d24;
         }
         :active {
-          border: 2px solid #ffbd4ba9;
+          border: 1px solid #ed1d24;
         }
       }
     }
     .submit {
       button {
-        background-color: #ff7700;
-        border-radius: 10px;
+        background-color: #ed1d24;
         width: 200px;
         height: 40px;
         color: white;
         font-size: 1.4rem;
-        border: 1px solid #ff7700;
         position: relative;
         transition: 0.5s;
 
@@ -194,7 +197,6 @@ const Body = styled.div`
         ::before {
           content: "";
           position: absolute;
-          border-radius: 10px;
 
           width: 0%;
           height: 100%;
@@ -209,7 +211,7 @@ const Body = styled.div`
           position: absolute;
           width: 100%;
           height: 100%;
-          background-color: #ff7700;
+          background-color: #ed1d24;
           top: 0;
           left: 0;
         }

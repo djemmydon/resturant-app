@@ -39,6 +39,9 @@ function Review() {
   };
   return (
     <Body>
+      <div className="header">
+        <h2>What People Say</h2>
+      </div>
       <Slider {...settings}>
         {data.map((item) => (
           <div className="swipe shadow-lg">
@@ -68,9 +71,22 @@ function Review() {
 export default Review;
 
 const Body = styled.div`
-  margin: 6rem 2rem;
+  margin: 6rem 1rem;
   max-width: 100%;
   align-items: center;
+  background-image: -webkit-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.5) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.5) 75%,
+    transparent 75%,
+    transparent
+  );
+  height: 100%;
+  padding: 3rem 0;
+  background-size: cover;
 
   @media screen and (max-width: 400px) {
     margin: 6rem 1rem;
@@ -78,12 +94,20 @@ const Body = styled.div`
 
   .slick-next {
     right: 0;
+    color:red!important;
   }
   .slick-prev {
     left: 0;
   }
 
-  .body_swipe {
+  .header {
+    text-align: center;
+    width: 100%;
+    margin: 2rem 0;
+
+    h2 {
+      text-transform: uppercase;
+    }
   }
 
   .slick-slide {
@@ -95,7 +119,12 @@ const Body = styled.div`
     height: 400px;
     padding: 1rem 1rem;
     margin: 0 0px;
-    background-color: white;
+    transition: 0.2s ease-in-out;
+    background-color: rgb(245, 245, 245);
+    :hover {
+      background-color: #ed1d24;
+      color: white;
+    }
 
     @media screen and (max-width: 400px) {
       width: 300px !important;
@@ -108,6 +137,9 @@ const Body = styled.div`
       width: 300px;
       margin: 10px auto;
 
+      @media screen and (max-width: 500px) {
+        width: 250px;
+      }
       p {
         font-size: 0.8rem;
         text-align: center;
@@ -130,7 +162,7 @@ const Body = styled.div`
         font-size: 5rem;
         line-height: 70px;
         color: #f39292;
-        text-align:center;
+        text-align: center;
       }
     }
 

@@ -10,7 +10,7 @@ import { cartActions } from "../redux/product";
 
 function Navbar() {
   const [search, setSearch] = useState(false);
-
+  const [show, handleShow] = useState(false);
   const [open, setOpen] = useState(true);
   const [nav, setNav] = useState(false);
   const { totalQty } = useTotal();
@@ -23,9 +23,23 @@ function Navbar() {
     setNav(!nav);
   };
 
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      handleShow(true);
+    } else if (window.scrollY < 90) {
+      handleShow(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
   return (
     <Body>
-      <nav className=" relative h-full ">
+      <nav
+        className={
+          show ? "relative h-full nav_color" : "relative h-full nav_color2"
+        }
+      >
         <>
           <Search>
             <div className={search ? `search active` : `search`}>
@@ -53,7 +67,7 @@ function Navbar() {
           </Search>
         </>
 
-        <NavbarFlexBody className="shadow-xl">
+        <NavbarFlexBody className="shadow-md">
           <div className="nav_content">
             <ul className="">
               <li className=" ">
@@ -87,7 +101,7 @@ function Navbar() {
                 onClick={handleOpen}
                 className=" flex flex-col justify-center items-center cursor-pointer relative"
               >
-                <span className=" absolute w-4 h-4 rounded-full -right-1 -top-0 text-center text-xs bg-[#fff] text-[#ed1d24]    cursor-pointer">
+                <span className=" absolute w-4 h-4 rounded-full -right-1 -top-0 text-center text-xs bg-[#ed1d24] text-[#fff]    cursor-pointer">
                   {totalQty}
                 </span>
                 <span className="material-symbols-outlined text-2xl">
@@ -161,13 +175,27 @@ function Navbar() {
 export default Navbar;
 
 const Body = styled.div`
+  .nav_color {
+    background-color: white;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    transition: 0.3s;
+    color: #000;
+  }
+  .nav_color2 {
+    background-color: #000;
+    color: white;
+    height: 60px;
+    transition: 0.3s;
+  }
   .mobile_nav {
     width: 300px;
     background-color: red;
     position: fixed;
     height: 100%;
     background-color: #fff;
-    z-index: 100;
     margin-top: 3rem;
     padding: 1rem 0;
     /* transform: scaleX(0); */
@@ -179,6 +207,7 @@ const Body = styled.div`
       flex-direction: column;
       gap: 2rem;
       padding: 1rem;
+      color: #000;
 
       li {
         font-size: 1rem;
@@ -195,14 +224,12 @@ const Body = styled.div`
 const NavbarFlexBody = styled.div`
   display: flex;
   justify-content: space-between;
-  color: #000;
-  height: 60px;
   position: fixed;
   left: 0;
   width: 100%;
-  background-color: #fff;
   z-index: 200;
   top: 0;
+  height: 60px;
   padding: 0 1rem;
 
   .nav_content {
@@ -243,6 +270,14 @@ const NavbarFlexBody = styled.div`
         font-size: 1rem;
         span {
           font-size: 1rem;
+        }
+      }
+    }
+    @media screen and (max-width: 400px) {
+      h1 {
+        font-size: 0.8rem;
+        span {
+          font-size: 0.8rem;
         }
       }
     }

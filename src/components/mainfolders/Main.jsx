@@ -46,7 +46,13 @@ function Main() {
               <h2>TNew Men's Accessories</h2>
               <span>Sneakers, Keds, Sweatshirts, Hoodies & much more...</span>
               <div className="button">
-                <button>{`Shop Now >`}</button>
+                <button>
+                  <span>Shop Now</span>
+
+                  <span className="material-symbols-outlined text-2xl">
+                    shopping_cart
+                  </span>
+                </button>
               </div>
             </div>
             <div className="img">
@@ -62,7 +68,13 @@ function Main() {
               <h2>TNew Men's Accessories</h2>
               <span>Sneakers, Keds, Sweatshirts, Hoodies & much more...</span>
               <div className="button">
-                <button>{`Shop Now >`}</button>
+                <button>
+                  <span>Shop Now</span>
+
+                  <span className="material-symbols-outlined text-2xl">
+                    shopping_cart
+                  </span>
+                </button>
               </div>
             </div>
             <div className="img">
@@ -78,7 +90,12 @@ function Main() {
               <h2>TNew Men's Accessories</h2>
               <span>Sneakers, Keds, Sweatshirts, Hoodies & much more...</span>
               <div className="button">
-                <button>{`Shop Now >`}</button>
+                <button>
+                  <span>Shop Now</span>
+                  <span className="material-symbols-outlined text-2xl">
+                    shopping_cart
+                  </span>
+                </button>
               </div>
             </div>
             <div className="img">
@@ -131,6 +148,12 @@ const Body = styled.div`
     justify-content: center !important;
     align-items: center !important;
 
+    @media screen and (max-width: 600px){
+      flex-direction: column;
+    align-items: flex-start;
+
+    }
+
     .swiper-pagination-bullet {
       background-color: #ffffff;
       transition: 0.5s;
@@ -161,7 +184,6 @@ const Body = styled.div`
     border-radius: 100px;
     border: 10px solid #111;
     transition: 0.5s;
-
 
     &:hover {
       border: 10px solid white;
@@ -216,7 +238,7 @@ const Body = styled.div`
           padding: 0;
         }
         h2 {
-          font-size: 6.5rem;
+          font-size: 4.5rem;
           font-weight: 600;
           line-height: 100px;
           color: white;
@@ -233,12 +255,18 @@ const Body = styled.div`
 
         .button {
           margin-top: 1rem;
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          span {
+            font-size: 10px;
+          }
           button {
             color: white;
-            background-color: #353232;
+            background-color: #ed1d24;
             width: 140px;
-            height: 35px;
-            border: 2px solid #353232;
+            height: 40px;
             transition: 0.5s;
 
             :hover {
@@ -256,18 +284,17 @@ const Body = styled.div`
           height: 600px;
         }
         @media screen and (max-width: 600px) {
-          height: 400px;
+          height: 500px;
           width: 100%;
         }
         @media screen and (max-width: 400px) {
-          height: 500px;
-          width:100%;
+          height: 300px;
+          width: 100%;
         }
         img {
           height: 100%;
-          width:100%;
-          object-fit:cover;
-
+          width: 100%;
+          object-fit: cover;
         }
       }
     }

@@ -36,6 +36,7 @@ function ProductChild({ item }) {
             src={item.image}
             placeholderSrc={item.image}
             effect="blur"
+            className="img"
           />
         </div>
         <div className="flex_body">
@@ -81,6 +82,7 @@ const Body = styled.div`
   border: 0.6px solid rgba(27, 27, 27, 0.1);
   /* transition: 0.3s ease-in-out; */
   width: 100%;
+  overflow: hidden;
   .image {
     transition: 0.2s;
     margin-bottom: 0.5rem;
@@ -94,6 +96,11 @@ const Body = styled.div`
     align-items: center;
     overflow: hidden;
 
+    transition: all 0.3s;
+
+    :hover {
+      transform: scale(1.1);
+    }
     @media screen and (max-width: 500px) {
       height: 200px;
     }
@@ -102,10 +109,6 @@ const Body = styled.div`
       width: 100%;
       object-fit: cover;
       margin: 0 auto;
-      &:hover {
-        transform: scale(1.1);
-        transition: 0.3s ease-in-out;
-      }
     }
   }
   .flex_body {
@@ -115,8 +118,13 @@ const Body = styled.div`
     color: white;
 
     .text {
-      margin: 5px 1rem;
+      padding: 5px 1rem;
       color: #010101;
+      overflow: hidden;
+      position: relative;
+      z-index: 5;
+      background-color: #fff;
+      width: 100%;
 
       h1 {
         font-size: 0.9rem;
