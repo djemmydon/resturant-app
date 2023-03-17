@@ -24,7 +24,13 @@ function Header({ name, link }: { name: string, link: string }) {
 export default Header
 
 const Body = styled.div`
-   margin :2rem 0.8rem ;
+   margin :2rem 3.5rem ;
+
+   @media screen and (max-width: 600px) {
+    margin :2rem 0.8rem ;
+
+
+        }
    .flex_body{
     display: flex;
     flex-direction: row;

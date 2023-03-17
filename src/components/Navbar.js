@@ -294,7 +294,7 @@ const Search = styled.div`
     flex-direction: column;
     justify-content: center;
     padding: 10px 20px;
-    z-index: 40;
+    z-index: 1000;
     width: 100%;
     height: 0vh;
     position: fixed;

@@ -41,7 +41,7 @@ function Category() {
     <Body>
       <Slider {...settings}>
         {data.map((item) => (
-          <div className="swipe">
+          <div className="swipe" key={item.image}>
             <div>
               <img src={item.image} alt="" />
             </div>

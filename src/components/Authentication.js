@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { userAction } from "../redux/user";
 
 function Authentication() {
   const [openReg, setOpenReg] = useState(false);
@@ -28,6 +29,8 @@ const Login = ({ setOpenReg, openReg }) => {
   const [password, setPassword] = useState("");
   const [error, setEorr] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
   // let regexEmail = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
 
   const onSubmit = (e) => {
@@ -46,12 +49,13 @@ const Login = ({ setOpenReg, openReg }) => {
     axios
       .post("https://commerce-backend-rho.vercel.app/api/v1/auth/login", data, {
         headers: {
-          "Content-Type": "application/json, text/plain",
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
+        setLoading(false);
+        dispatch(userAction.getUser(res.data));
         console.log(res.data);
-        setLoading(true);
       })
       .catch((err) => {
         console.log(err);
@@ -134,14 +138,18 @@ const Register = ({ setOpenReg, openReg }) => {
     };
 
     axios
-      .post("https://commerce-backend-rho.vercel.app/api/v1/auth/login", data, {
-        headers: {
-          "Content-Type": "application/json, text/plain",
-        },
-      })
+      .post(
+        "https://commerce-backend-rho.vercel.app/api/v1/auth/register",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);

@@ -5,6 +5,7 @@ import Review from "../components/Review";
 import Banner from "../components/mainfolders/Banner";
 import Main from "../components/mainfolders/Main";
 import ProductPage from "./ProductPage";
+import Hero from "../components/mainfolders/Hero";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
         <Header name="Featured Product" link="/products" />
         <ProductPage />
         <Banner />
+        <Hero />
         <Review />
       </div>
     </div>

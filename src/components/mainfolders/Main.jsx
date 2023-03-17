@@ -130,11 +130,9 @@ from{
 `;
 
 const Body = styled.div`
-  height: 100vh;
+  height: 100%;
   max-width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-top: 10rem;
+  overflow: hidden;
   background-color: rgb(27, 27, 27);
 
   @media screen and (max-width: 700px) {
@@ -144,9 +142,7 @@ const Body = styled.div`
     width: 100% !important;
 
     height: 100%;
-    display: flex;
-    justify-content: center !important;
-    align-items: center !important;
+ 
 
     @media screen and (max-width: 600px){
       flex-direction: column;

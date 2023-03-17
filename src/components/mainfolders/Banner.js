@@ -9,7 +9,7 @@ function Banner() {
           <img src="/img/03.png" alt="Banner View" />
         </div>
         <div className="banner_text">
-          <h2>Product Name</h2>
+          <h2>Sneakers</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
