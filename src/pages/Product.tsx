@@ -1,25 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Products from "../components/Products/Products";
+import { productsApi } from "../redux/apiSlice";
+import { FetchType } from "../typing";
+
+
+
 
 function Product() {
-  const [fetch, setFetch] = useState([]);
 
-  const options = {
-    method: "GET",
-    url: "https://commerce-backend-rho.vercel.app/api/v1/product",
-  };
-  useEffect(() => {
-    const fetchApi = async () => {
-      await axios.request(options).then((res) => {
-        setFetch(res.data);
-      });
-    };
+  const { data: product, isLoading, error: isError } = productsApi.useGetAllProductsQuery<FetchType>();
 
-    fetchApi();
-  });
+
   return (
     <Body>
       <div className="link_header">
@@ -31,36 +24,11 @@ function Product() {
           <Shop />
         </Template1>
         <Template2>
-          <div className="header">
-            <h2>Shop</h2>
-
-            <div className="header_flex">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-              <img src="/img/01.png" alt="" />
-            </div>
-          </div>
+          <div className="header"></div>
 
           {/*  Sending property  to it child*/}
           <div>
-            {fetch.length === 0 && (
-              <div className="text-center flex items-center justify-center w-full h-[200px]">
-                <h1>Loading 😊😊</h1>
-              </div>
-            )}
-
-            {fetch.length == null && (
-              <div className="text-center flex items-center justify-center w-full h-[200px]">
-                <h1>Something Went Wrong 😒😒😒</h1>
-              </div>
-            )}
-            <Products fetch={fetch} />
+            <Products fetch={product} isLoading={isLoading} isError={isError} />
           </div>
         </Template2>
       </TemplateBody>
@@ -80,19 +48,19 @@ const Shop = () => {
       <div className="shop_body">
         <div className="shop_item">
           Computer & Laptop
-          <span class="material-symbols-outlined">chevron_right</span>
+          <span className="material-symbols-outlined">chevron_right</span>
         </div>
         <div className="shop_item">
           Cameta & Photo
-          <span class="material-symbols-outlined">chevron_right</span>
+          <span className="material-symbols-outlined">chevron_right</span>
         </div>
         <div className="shop_item">
           Audio & Home
-          <span class="material-symbols-outlined">chevron_right</span>
+          <span className="material-symbols-outlined">chevron_right</span>
         </div>
         <div className="shop_item">
           SmartPhone & Ipad
-          <span class="material-symbols-outlined">chevron_right</span>
+          <span className="material-symbols-outlined">chevron_right</span>
         </div>
       </div>
     </ShopBody>
@@ -129,7 +97,7 @@ const Template2 = styled.div`
   }
 
   .header {
-    border: 1px solid rgba(192,201,210,.5);
+    border: 1px solid rgba(192, 201, 210, 0.5);
     h2 {
       margin-left: 10px;
       padding: 0.5rem;
@@ -153,16 +121,16 @@ const Template2 = styled.div`
 
     p {
       font-weight: 600;
-      color: rgba(192,201,210,.5);
+      color: rgba(192, 201, 210, 0.5);
     }
   }
 `;
 
 const ShopBody = styled.div`
-  border: 1px solid rgba(192,201,210,.5);
+  border: 1px solid rgba(192, 201, 210, 0.5);
 
   .header {
-    border-bottom: 1px solid rgba(192,201,210,.5);
+    border-bottom: 1px solid rgba(192, 201, 210, 0.5);
     padding: 5px 10px;
   }
 

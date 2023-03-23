@@ -5,6 +5,8 @@ import styled from "styled-components";
 import useTotal from "../redux/total";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../redux/product";
+import { productsApi } from "../redux/apiSlice";
+import Loading from "./Loading";
 
 // className={`${link}`}
 
@@ -14,6 +16,13 @@ function Navbar() {
   const [open, setOpen] = useState(true);
   const [nav, setNav] = useState(false);
   const { totalQty } = useTotal();
+  const [searchInput, setSearchInput] = useState("");
+  const {
+    data: product,
+    isLoading,
+    error: isError,
+  } = productsApi.useGetSearchProductQuery(searchInput);
+
   const dispatch = useDispatch();
 
   const handleOpen = () => {
@@ -55,12 +64,54 @@ function Navbar() {
                 <input
                   placeholder="search"
                   className="w-full h-14 px-2 border-2"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
                 />
               </div>
 
-              <div className="h-full bg-white">
-                <div className="flex justify-center items-center h-full">
-                  <h2>No result found😒😒</h2>
+              <div className="h-full bg-white shadow-md rounded">
+                <div className="flex  p-4 h-full">
+                  {isLoading && (
+                    <div className="loader">
+                      <Loading />
+                    </div>
+                  )}
+
+                  {isError && (
+                    <div className="loader">
+                      <h1>No Result Found</h1>
+                    </div>
+                  )}
+
+                  {!searchInput && (
+                    <div className="flex items-center justify-center w-full">
+                      <p>No Result Found</p>
+                    </div>
+                  )}
+                  {searchInput && (
+                    <div className="flex flex-col gap-6">
+                      {product?.products?.slice(0, 10).map((item) => (
+                        <Link
+                          to={`/products/${item._id}`}
+                          key={item._id}
+                          className="flex items-center gap-4"
+                          onClick={() => {
+                            setSearch(!search);
+                            setSearchInput("");
+                          }}
+                        >
+                          <img
+                            src={item.image}
+                            alt="Search Market4all"
+                            className="h-10"
+                          />
+                          <p className="text-[12px] font-bold">{item.title}</p>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+
+                  {fetch.length === 0 && <Body>Something Went Wrong</Body>}
                 </div>
               </div>
             </div>
@@ -288,17 +339,18 @@ const Search = styled.div`
   /* bg-white flex flex-col justify-center px-10 py-5 z-40 w-full h-screen absolute top-0 right-0  ; */
   transition: 1s;
 
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+
   .search {
-    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 10px 20px;
-    z-index: 1000;
-    width: 100%;
-    height: 0vh;
-    position: fixed;
-    top: -10rem;
+    width: 600px;
+    margin: 0 auto;
+    color: black;
     right: 0;
     transition: 0.5s ease;
     opacity: 0;
@@ -306,7 +358,7 @@ const Search = styled.div`
   }
 
   .search.active {
-    height: 100vh;
+    height: 600px;
     top: 0;
     opacity: 1;
 

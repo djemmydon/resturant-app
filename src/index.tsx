@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { muusiApi } from './redux/apiSlice';
+import { productsApi } from './redux/apiSlice';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { ApiProvider } from "@reduxjs/toolkit/query/react"
@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
 
-    <ApiProvider api={muusiApi}>
+    <ApiProvider api={productsApi}>
       <Provider store={store}>
         <ToastContainer />
         <App />

@@ -1,19 +1,30 @@
 import ProductChild from "./ProductChild";
 import styled from "styled-components";
-import ScaleLoader from "react-spinners/ScaleLoader";
+import Loading from "../Loading";
+import { fetchType, ProductType } from "../../typing"
 
-function Products({ fetch }) {
+
+function Products({ fetch, isLoading, isError }: fetchType) {
+
+  console.log(fetch)
+
   return (
     <MainBody>
-      {fetch.length === 0 ? (
+      {isLoading && (
         <div className="loader">
-          <div className="loaderitem">
-            <ScaleLoader color="#ed1d24" size={30} />
-          </div>
+          <Loading />
         </div>
-      ) : (
+      )}
+
+      {isError && (
+        <div className="loader">
+          <h1>Rjnksnkscwjsnnwcd</h1>
+        </div>
+      )}
+
+      {fetch && (
         <Body>
-          {fetch?.map((item) => (
+          {fetch?.products?.map((item) => (
             <ProductChild key={item._id} item={item} />
           ))}
         </Body>
